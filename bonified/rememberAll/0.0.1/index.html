@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Index</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Index</h1>
+    
+    
+
+
+    
+
+
+    <h3>rememberAll 0.0.1</h3>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>rememberAll</h1>
+
+<p>This app was built by Stefan and Darren Fall 2013</p>
+
+<p>The procfile is for heroku only</p>
+
+<p>Building for PhoneGap follow the following link:</p>
+
+<p>There are 2 ways to create a phoneGap Applications:
+1 - Create an adobe account and you can do it through Command Line strictly, or you can 
+use the site https://build.phonegap.com
+<strong></strong>I couldn&#39;t do option 1 Because Adobe wouldn&#39;t accept my account Good Luck<strong></strong></p>
+
+<p>2 - Or you can use your github account but you must do some through Command Line and then use the 
+website(https://build.phonegap.com) for the build process.</p>
+
+<p>Using Option 1 or 2:</p>
+
+<p>http://docs.phonegap.com/en/edge/guide<em>cli</em>index.md.html#PhoneGap%0ABuild</p>
+
+<p>A - npm install -g phonegap</p>
+
+<p>B - to your public folder and run:
+    phonegap create hello com.example.hello HelloWorld</p>
+
+<p>C - Go into the folder created and into the www, look at the index.html and grab this
+    code and add it to your
+    index file:
+   &lt;script type=&quot;text/javascript&quot; src=&quot;phonegap.js&quot;&gt;&lt;/script&gt;
+   &lt;script type=&quot;text/javascript&quot; src=&quot;js/index.js&quot;&gt;&lt;/script&gt;
+   <strong></strong>You must add your jquery include in between<strong></strong> 
+   example(&lt;script src=&quot;lib/jquery-1.10.2.js&quot;&gt;&lt;/script&gt;)
+   &lt;script type=&quot;text/javascript&quot;&gt;
+        app.initialize();
+   &lt;/script&gt;</p>
+
+<p>D - Now move your index.html  and all of your files from your public folder into the    <br/>    www directory, merge folders and overwrite if needed</p>
+
+<p>E -  Also edit the config.xml file and add the correct server information
+     example:
+     &lt;access origin=&quot;http://bonified.herokuapp.com&quot; /&gt;
+     &lt;access origin=&quot;http://bonified.herokuapp.com/<em>&quot; /&gt;
+     &lt;access origin=&quot;</em>&quot; /&gt;</p>
+
+<p>F -  Change your URL&#39;s. In your Backbone models and in any ajax calls from the client, 
+     so if the call is initially /getHighScores, it should now be 
+     bonified.herokuapp.com/getHighScores.</p>
+
+<p>At this point depending on your choice see below:</p>
+
+<p>Option 1:
+G -  You can continue with Command Line or got to https://build.phonegap.com to finish 
+     the process</p>
+
+<p>Option 2:
+G -  You must go the website https://build.phonegap.com to finish the process</p>
+
+<h1>Heroku</h1>
+
+<ol><li>Before you follow the guide below, you need to have registered an 
+account on Heroku.com and installed their software (all easy to 
+find)</li></ol>
+
+<p>The steps to upload your code onto heroku.com and host your node app</p>
+
+<p>Follow EVERY step on this site UNTIL you get to a command saying git push heroku master (you can skip the step that says &quot;foreman start&quot;
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#prerequisites</p>
+
+<p>If you try to do the next step (git push heroku master) and it gives an error saying something about &quot;access denied (something about public key)
+do the following commands:
+heroku keys:add (enter)
+then just tab and add all your .pub files in the c:\users\%YOUR USER%.shh folder</p>
+
+<p>If you are having problems finding or making your public keys go to this site.
+http://stackoverflow.com/questions/12206779/git-push-heroku-master-permission-denied-publickey-fatal-the-remote-end-hung</p>
+
+<p>If you dont get the error, just continue following the article above. You can stop when you do the command:
+   heroku ps:scale web=1</p>
+
+<h1>Tips/Troubles</h1>
+
+<ol><li><p>When I was trying to to upload code to the heroku server I kept
+getting an error that said I failed to authenticate(public key).
+I later found out that I wasn&#39;t using the right public on my end.</p><p>I fixed this by following the guide presented here (summary, I was trying to upload code using my github public key whereas I was supopose to use my other key that I had in my ~/ssh folder).</p><p>http://stackoverflow.com/questions/12206779/git-push-heroku-master-permission-denied-publickey-fatal-the-remote-end-hung</p></li><li><p>When we were using phonegap for the first time, we forgot to add 
+the server URL to the backbone model URLs so backbone would look
+to the server from the client side. Remember, backbone is now completely separate from the server when you phonegap it.</p></li><li><p>When you are trying to push code to the heroku server, make a
+branch from the git link provided by heroku. This way, pushing code to heroku is SUPER easy.You just checkout to the heroku branch, pull from the master, then push (which pushes to the server).</p></li><li><p>To use jsdoc, you need to put in the command line:
+jsdoc %project folder% *
+to generate a doc for your whole project</p></li><li><p>WHen using mongoose to get all the highscores of a specific user,
+it was easier for me to do just a find, then narrrow down the search, then trying to use findOne (just a username) and getting all the data that way. I suppose it makes more sense to use find when you want multi objects back (or a collection). </p></li><li><p>DONT EVER MANUALLY CHANGE THE PATH, it will get trunked if you
+attempt this via the command line.</p></li><li><p>Use underscores when trying to type a commit message via the
+command line. Git doesn&#39;t support spaces in your string for some reason. Also, git commit -am &#39;MSG&#39; is really handy to add files and add a message at the same time.</p></li><li><p>When trying to install the android apk on my phone, downloading
+the apk then transfering it to my phone, then installing it would give me a parse error. But if I use the qrcode, the app installed just fine.</p></li></ol></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#AddUser">AddUser</a></li><li><a href="global.html#BonifyView">BonifyView</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#findOneHighscore">findOneHighscore</a></li><li><a href="global.html#GameoverView">GameoverView</a></li><li><a href="global.html#getTopHighscore">getTopHighscore</a></li><li><a href="global.html#HighScoreView">HighScoreView</a></li><li><a href="global.html#IndexView">IndexView</a></li><li><a href="global.html#makeid">makeid</a></li><li><a href="global.html#newGame">newGame</a></li><li><a href="global.html#Router">Router</a></li><li><a href="global.html#SingleUser">SingleUser</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#username">username</a></li><li><a href="global.html#UserSchema">UserSchema</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 10 2013 16:10:28 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

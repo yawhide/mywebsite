@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: app.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: app.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>
+/**
+ * Module dependencies.
+ * This is where we "require" all the necessary libraries
+    and/or models that our node server needs.
+ */
+
+ var express = require('express')
+ , routes = require('./routes')
+ , user = require('./routes/user')
+ , http = require('http')
+ , path = require('path')
+ , User = require('./models/User.js')
+ , fs = require('fs')
+ , _ = require('underscore')
+ , Backbone = require('backbone')
+ , exphbs = require('express3-handlebars');
+
+ var app = express();
+
+/**
+ * All the environments
+ * This is all auto-generated
+ * app.set('port') => this line is where you can specify the port
+    at which the app runs on.
+*/
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.engine('handlebars', exphbs({defaultLayout : 'main'}));
+app.set('view engine', 'handlebars');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(app.router);
+app.use(express.static(__dirname + '/public'));
+
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+}
+
+/**
+ * This method reads the index.html file in the public directory.
+    if the current URL is the index page '/'.
+*/
+app.get('/', function(req, res){
+    fs.readFile('./public/index.html', function(error, content){
+        if(error){
+            res.writeHead(500);
+            res.end();
+        }
+        else{
+            res.writeHead(200, { 'Content-Type': 'text/html'});
+            res.end(content, 'utf-8');
+        }
+    });
+});
+
+/**
+ * Sends the frontend the result of calling User.getTopHighscore
+    which is a multi-layered JSON object 
+ * User is a User model from the models/User.js file.
+ * getTopHighscore is a mongoose method from the models folder.
+*/
+app.get('/getHighScores', function(req,res){
+
+    User.getTopHighscore(function(err, collection){
+        if(err != null){
+            console.log("ERRORRRR!!!!");
+            res.send(err);
+        }
+        else{
+            console.log("Collection is gotten");
+            res.send(collection);
+        }
+    });
+});
+
+/**
+ * Receives a username from the frontend and calls findOneHighscore
+    to find all the highscores that specific uses has entered
+    in the database. It then sends the frontend a multi-layered JSON
+    object.
+ * User is a User model and findOneHighscore is a mongoose method,
+    both are form the models/User.js file
+*/
+app.post('/search', function(req, res){
+
+    var username = req.body.username;
+
+     User.findOneHighscore(username, function(err, collection){
+
+        if(err != null){
+                    console.log("ERRORRRR!!!!");
+                    res.send(err);
+                }
+                else{
+                    console.log(collection);
+                    res.send(collection);
+                }
+     });
+});
+
+/**
+ * Receives a username and a highscore from the frontend and calls
+    addUser which posts those two pieces of info into the mongoDB
+    database. It then sends the frontend a status of success or 
+    fail.
+ * User is a User model and findOneHighscore is a mongoose method,
+    both are form the models/User.js file
+*/
+app.post('/addHighScore', function(req, res) {
+    var username = req.body.username;
+    var highscore = req.body.highscore;
+    console.log(highscore);
+    User.addUser(username, highscore, function(err, user) {
+        if(err != null){   
+            console.log(err);    
+            res.send(err);
+        }
+        else{
+            res.send(user);
+        }
+        
+    }); 
+});
+
+/**
+ * Auto generated, starts the nodejs server
+*/
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#AddUser">AddUser</a></li><li><a href="global.html#BonifyView">BonifyView</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#findOneHighscore">findOneHighscore</a></li><li><a href="global.html#GameoverView">GameoverView</a></li><li><a href="global.html#getTopHighscore">getTopHighscore</a></li><li><a href="global.html#HighScoreView">HighScoreView</a></li><li><a href="global.html#IndexView">IndexView</a></li><li><a href="global.html#makeid">makeid</a></li><li><a href="global.html#newGame">newGame</a></li><li><a href="global.html#Router">Router</a></li><li><a href="global.html#SingleUser">SingleUser</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#username">username</a></li><li><a href="global.html#UserSchema">UserSchema</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Thu Oct 10 2013 16:10:28 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

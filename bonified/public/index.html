@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Le styles -->
+
+  <link href="/bonified/css/bootstrap.css" rel="stylesheet">
+  <link href="/bonified/css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/bonified/css/styles.css" rel="stylesheet" type='text/css'>
+  <script src="/bonified/lib/jquery-1.10.2.js"></script>
+  <script src="/bonified/lib/bootstrap.min.js"></script>
+
+
+  
+</head>
+
+
+
+
+<body >
+
+
+  <script id="index_template" type="text/x-handlebars-template">
+   <div class="navbar-fixed-top">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a  class="brand" >Bonified</a>
+      </div>
+    </div>
+  </div>
+  <div class='center'>
+  </br>
+    <p>
+      <a href='#/highscore' class='btn btn-large rbutton marginTop10'>High Scores</a>
+    </p>
+    <p>
+      <a href='#/bonify' class='btn btn-large rbutton'>Start</a>
+    </p>
+    <h4>Extras</h4>
+    <div class='xin'>
+      <span class='label'>Authors:</span>
+      Darren and Stefan <br/>
+      <span class='label'>Languages used:</span>
+      Node.js, Express.js, Html5, Javascript, JQuery, Handlebars.js, Mongoose, MongoDB <br/>
+    </div>
+  </div>
+</script>
+
+
+<script id="highscore_template" type="text/x-handlebars-template">
+  <div class="navbar-fixed-top">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a  class="brand" >HIGHSCORES</a>
+      </div>
+    </div>
+  </div>
+  <div class='center'>
+    <form class='search'>
+      <div>
+        <label>Search for your highscore:</label>
+        <input type='text' id='username' placeholder='enter your username' autocomplete='off' autofocus class='input-block-level'/><br/>
+      </div>
+      <button id='searchButton' value='Search!' class='btn btn-primary gbutton' >Search!</button>
+    </form>
+    <a href='#/bonify'>
+      <button class='btn rbutton'>New game?</button>
+    </a>
+    <table class='table table-bordered table-striped table-condensed'>
+      {{#highscoreArray}}
+      <tr><td>{{username}}</td><td>{{highscore}}</td></tr>
+      {{/highscoreArray}}
+    </table>
+  </div>
+</script>
+
+<script id="bonify_template" type="text/x-handlebars-template">
+  <div class="navbar-fixed-top">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a  class="brand" >Start Remembering!!!</a>
+      </div>
+    </div>
+  </div>
+  <div class='center'>
+    <p class="letter">{{currText}}</p>
+    <p class="fontsize14">Your current score is: <span class='score'>{{score}}</span></p>
+    <form class='guessLetter'>
+      <div>
+        <input type='text' id='guessInput' name='write' placeholder='input your guess here' autocomplete='off' autofocus autocorrect='off' READONLY></input>
+      </div>
+      <button id='guess' name='guess' class='btn btn-primary gbutton'>Guess</button>
+    </form>
+    <ul id='keyboard'>
+      <li class='letterStart'>Q</li>
+      <li class='letter'>W</li>
+      <li class='letter'>E</li>
+      <li class='letter'>R</li>
+      <li class='letter'>T</li>
+      <li class='letter'>Y</li>
+      <li class='letter'>U</li>
+      <li class='letter'>I</li>
+      <li class='letter'>O</li>
+      <li class='letterEnd'>P</li>
+      <li class='letterStart'>A</li>
+      <li class='letter'>S</li>
+      <li class='letter'>D</li>
+      <li class='letter'>F</li>
+      <li class='letter'>G</li>
+      <li class='letter'>H</li>
+      <li class='letter'>J</li>
+      <li class='letter'>K</li>
+      <li class='letter'>L</li>
+      <li class='letterStart'>Z</li>
+      <li class='letter'>X</li>
+      <li class='letter'>C</li>
+      <li class='letter'>V</li>
+      <li class='letter'>B</li>
+      <li class='letter'>N</li>
+      <li class='letter'>M</li>
+      <li class="delete lastitem">delete</li>  
+    </ul>
+    <p>
+      <button value='Restart' id='goto_bonify' class='btn rbutton'>Restart</button>
+    </p>
+    <p>
+      <a href=''>
+        <button class='btn rbutton'>Home</button>
+      </a>
+    </p>
+    <div class='xin'>
+      <span class='label'>Instructions:</span></br>
+      A memory game where you must remember the letters you already have typed while constantly adding one more letter. <a style="color:red;">Not case sensitive</a><br/>
+    </div> 
+  </div>
+</script>
+
+
+<script id="gameover_template" type="text/x-handlebars-template">
+  <div class="navbar-fixed-top">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a  class="brand" >GAMEOVER :(</a>
+      </div>
+    </div>
+  </div>
+  <div class='center'>
+    <p>
+      <a href='#/bonify' class='btn rbutton marginTop20'>New game?</a>
+    </p>
+    {{#score}}
+    <p>
+      <a href='#/highscore'>
+        <button class='btn rbutton'>See if ya made it to the High Scores!</button>
+      </a>
+    </p>
+    <p>Your score is: {{score}}</p>
+    <form class='addHS'>
+      <div>
+        <label>Enter one to three letters to be added to the highscores:</label>
+        <input type='text' name='username' placeholder='username' autocomplete='off' autofocus /><br/>
+      </div>
+
+      <button type='submit' class='btn btn-primary gbutton'>Add Highscore</button>
+    </form>
+    {{/score}}
+    {{^score}} 
+    <p>
+      <a href='#/highscore' class='btn rbutton'>Check out the High Scores!</a>
+    </p>
+    {{/score}}
+  </div>
+</script>
+
+<div class="container">
+
+</div>   
+
+
+
+<script src="/bonified/lib/underscore.js"></script>
+<script src="/bonified/lib/backbone.js"></script>
+<script src="/bonified/lib/handlebars_1.0.js"></script>
+<script src="/bonified/lib/mustache.js"></script>
+
+
+
+<script src="/bonified/js/models.js"></script>
+<script src="/bonified/js/views.js"></script>  
+<script src="/bonified/js/routers.js"></script>
+<script src="/bonified/js/controller.js"></script>
+
+<script>
+
+
+  Backbone.history.start();
+</script>
+</body>
+<!-- Le styles -->
+</html>
