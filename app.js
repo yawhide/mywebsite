@@ -20,9 +20,7 @@ app.use(require('morgan')('dev'));
 app.use('/projectyawhide', require('./projectyawhide/app'))
 app.use('/bonified', require('./bonified/app'))
 
-app.get('/', function (req, res){
-  res.redirect('/projectyawhide')
-})
+app.use(require('./main/app'))
 
 // development error handler
 // will print stacktrace
