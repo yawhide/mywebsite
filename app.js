@@ -17,7 +17,7 @@ app.use(favicon());
 app.use(require('morgan')('dev'));
 
 //app.use(require('./portal/app'));
-app.use('/projectyawhide', require('./projectyawhide/app'))
+app.use('/projectyawhide', require('./projectYawHide/app'))
 app.use('/bonified', require('./bonified/app'))
 
 app.use(require('./main/app'))
