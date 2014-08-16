@@ -78,9 +78,7 @@ app.get('/getHighScores', function(req,res){
     both are form the models/User.js file
 */
 app.post('/search', function(req, res){
-
   var username = req.body.username;
-
   User.findOneHighscore(username, function(err, collection){
 
     if(err != null){

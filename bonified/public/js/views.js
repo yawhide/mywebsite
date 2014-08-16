@@ -71,7 +71,7 @@ var HighScoreView = Backbone.View.extend({
     if($('#username').val() !== ''){
     $.ajax( {
       type: "POST",
-      url: "/search",
+      url: "/bonified/search",
       data: {"username": $("#username").val()},
       success: function(response) {
         var object = response;
