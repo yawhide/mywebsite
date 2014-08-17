@@ -6,12 +6,12 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "backbone": "1.0.0",
     "express": "3.4.0",
+    "express3-handlebars": "latest",
     "jade": "*",
     "mongoose": "3.6.20",
-    "underscore": "1.5.2",
-    "backbone" : "1.0.0",
-    "express3-handlebars": "latest",
-    "mongoose-validator": "*"
+    "mongoose-validator": "^0.2.2",
+    "underscore": "1.5.2"
   }
 }
