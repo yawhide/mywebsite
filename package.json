@@ -11,6 +11,7 @@
     "express": "~4.0.0",
     "express-partials": "^0.2.0",
     "express-session": "^1.5.1",
+    "googleapis": "^1.0.9",
     "method-override": "^1.0.0",
     "morgan": "~1.0.0",
     "myword": "0.0.1",

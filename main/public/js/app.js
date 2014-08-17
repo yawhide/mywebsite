@@ -10,5 +10,6 @@ var app = angular.module('mainApp', [
 .config(function ($routeProvider, $locationProvider){
   $routeProvider
     .when('/', {templateUrl: 'partials/main.html', controller: 'MainCtrl'})
-    .otherwise({templateUrl: 'partials/main.html', controller: 'MainCtrl'});
+    .otherwise({redirectTo: '/'})
+  $locationProvider.html5Mode(true);
 })
