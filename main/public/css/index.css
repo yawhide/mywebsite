@@ -3,7 +3,19 @@
 }
 
 body.body{
-  background-color: #E2E2E2;
+  
+}
+
+.listProjectItem h3,.h3{
+  margin: 6px 0;
+}
+
+.listProjects .container{
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: initial;
 }
 
 .superscriptText{
@@ -37,7 +49,30 @@ ul li:hover{
 }
 
 ul li.highlight{
-  -webkit-box-shadow: 1px 1px 10px 2px rgba(89, 127, 204, 0.8);
--moz-box-shadow:    1px 1px 10px 2px rgba(89, 127, 204, 0.8);
-box-shadow:         1px 1px 10px 2px rgba(89, 127, 204, 0.8);
+  -webkit-box-shadow: 1px 1px 5px 1px rgba(89, 127, 204, 0.8);
+  -moz-box-shadow:    1px 1px 5px 1px rgba(89, 127, 204, 0.8);
+  box-shadow:         1px 1px 5px 1px rgba(89, 127, 204, 0.8);
+  background-color: lightyellow;
 }
+
+.sideBar{
+  position: absolute;
+  width: 25%;
+}
+
+.listProjects{
+  width: 75%;
+  float:right;
+}
+
+.listProjectItem{
+  border: 1px solid #bec8d2;
+  background-color: #f8f9fa;
+  padding: 10px;
+  margin: 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+} 
