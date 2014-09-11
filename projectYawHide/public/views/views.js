@@ -62,7 +62,7 @@ var NearestStoresView = Backbone.View.extend({
 						var incomingStores =
 						"<div class='list-group'>"+
 						"{{#storesArray}}"+
-						"<a href='/#/viewFlyer/{{urlNumber}}' class='list-group-item text-center'>Sobeys - {{storeName}}</a>"+
+						"<a href='/projectYawHide/#/viewFlyer/{{urlNumber}}' class='list-group-item text-center'>Sobeys - {{storeName}}</a>"+
 						"{{/storesArray}}"+
 						"</div>";
 						
@@ -106,7 +106,7 @@ var PostalStoresView = Backbone.View.extend({
 									var incomingStores =
 									"<div class='list-group'>"+
 									"{{#storesArray}}"+
-									"<a href='/#/viewFlyer/{{urlNumber}}' class='list-group-item text-center'>Sobeys - {{storeName}}</a>"+
+									"<a href='/projectYawHide/#/viewFlyer/{{urlNumber}}' class='list-group-item text-center'>Sobeys - {{storeName}}</a>"+
 									"{{/storesArray}}"+
 									"</div>";
 
