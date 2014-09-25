@@ -26,7 +26,7 @@ app.get('/', function (req, res){
 })
 
 app.get('/resume', function (req, res){
-  res.download(path.resolve(__dirname, 'Resume2014Fall.pdf'))
+  res.download(path.resolve(__dirname, 'stefan wojcik resume.pdf'))
 })
 
 module.exports = app;

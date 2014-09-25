@@ -32,23 +32,25 @@ body.body{
 }
 
 .yellow{
-  color: yellow;
+  color: rgb(158, 158, 18);
 }
 
-ul li{
+.sideBar ul li{
   display: inline-block;
   background: white;
-  padding: 2px;
+  padding: 4px;
   margin: 5px;
   border-radius: 4px;
+  border: 1px solid lightblue;
+  font-size: 13px;
 }
-ul li:hover{
+.sideBar ul li:hover{
   opacity: 0.8;
   background-color: lightyellow;
   cursor: default;
 }
 
-ul li.highlight{
+.sideBar ul li.highlight{
   -webkit-box-shadow: 1px 1px 5px 1px rgba(89, 127, 204, 0.8);
   -moz-box-shadow:    1px 1px 5px 1px rgba(89, 127, 204, 0.8);
   box-shadow:         1px 1px 5px 1px rgba(89, 127, 204, 0.8);
@@ -58,6 +60,8 @@ ul li.highlight{
 .sideBar{
   position: absolute;
   width: 25%;
+  margin-left: 15px;
+  border-right: 1px solid #EEE;
 }
 
 .listProjects{
@@ -66,7 +70,6 @@ ul li.highlight{
 }
 
 .listProjectItem{
-  border: 1px solid #bec8d2;
   background-color: #f8f9fa;
   padding: 10px;
   margin: 10px;
@@ -76,3 +79,14 @@ ul li.highlight{
   -o-border-radius: 3px;
   border-radius: 3px;
 } 
+
+.internal{
+  font-size: 16px;
+  text-align: center;
+}
+
+.borderLine{
+  border-bottom: 1px solid #EEE;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
