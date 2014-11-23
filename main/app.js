@@ -29,8 +29,4 @@ app.get('/resume', function (req, res){
   res.download(path.resolve(__dirname, 'stefan wojcik resume.pdf'))
 })
 
-app.get('/playground', function (req, res){
-  res.render('a4problem')
-})
-
 module.exports = app;

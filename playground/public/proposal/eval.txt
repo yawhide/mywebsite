@@ -1,0 +1,21 @@
+
+Web Services:  some stuff is at api.uwaterloo.ca (public data).  The
+personal data (courses they're taking) you'll need to get from 
+cs349.student.cs...
+
+The sequence diagram and schematics aren't making sense to
+me when compared to your overview.  I don't understand why 
+the user needs to add events and search for locations etc
+when all the stuff you've listed (courses, exams) are known
+via the api (well, you did list midterms; that isn't).
+
+Please update to clarify.
+
+10/20
+
+
+20141115
+OK, makes more sense now.
+
+20/20
+
