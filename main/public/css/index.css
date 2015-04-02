@@ -84,7 +84,7 @@ body.body{
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
-} 
+}
 
 .internal{
   font-size: 16px;
@@ -100,4 +100,8 @@ body.body{
 .sideBar h5{
   padding-left: 5px;
   font-weight: 700;
+}
+
+.container h2{
+  text-align: center;
 }
