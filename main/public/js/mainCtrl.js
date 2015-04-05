@@ -7,5 +7,11 @@ angular.module('mainApp.mainCtrl', [])
   $scope.projectyawhide = false;
   $scope.chatpush = false;
   $scope.textnow = false;
+  $scope.sideBarClosed = true;
+
+  $scope.closeSideBar = function (){
+    $scope.sideBarClosed = !$scope.sideBarClosed;
+  }
 })
+
 
