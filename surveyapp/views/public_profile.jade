@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .row.top-buffer
+        .col-sm-12
+            if (success=='success')
+                .panel.panel-default
+                    .panel-heading User Profile
+                        a.btn.btn-xs.btn-info.pull-right(href='javascript:history.back()', title="Go back") back
+            
+                    ul.list-group
+                        li.list-group-item Username: #{result.username}
+                        li.list-group-item Name: #{result.firstName} #{result.lastName}
+                        li.list-group-item Email: #{result.email}
+                        li.list-group-item Phone: #{result.phoneNumber}
+
+            else if(success=='fail')
+                .modal.fade
+                    .modal-dialog
+                        .modal-content
+                            .modal-header
+                                h4.modal-title There seems to be a problem
+                            .modal-body
+                                | Sorry, there are no users by that name!
+                            .modal-footer
+                                a.btn.btn-primary(href='javascript:history.back()', title="Go back") Go back

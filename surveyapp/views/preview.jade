@@ -1,0 +1,25 @@
+br
+br
+h2 Preview your survey
+if (collection)
+	h3 #{collection.surveyName}
+	h4 Owner: #{collection.surveyOwner}
+	for q in collection.questionArray
+		h5 Question: #{q.questionName}
+		if(q.type === 'checkbox')
+			for a in q.answerArray
+				input(type='checkbox')
+				| #{a}
+		else if(q.type === 'radio')
+			for a in q.answerArray
+				input(type='radio')
+				| #{a}
+		else if(q.type === 'select')
+			select
+				for a in q.answerArray
+					option #{a}
+		else if(q.type === 'text')
+			input(type='text')
+		else if(q.type === 'textarea')
+			textarea
+div.menu-trigger.btn.btn-default Back

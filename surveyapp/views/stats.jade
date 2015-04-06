@@ -1,0 +1,30 @@
+extends layout
+
+block content
+	h3 #{surveyName}
+	div(id="dvData")
+		table(class='table')
+			tr
+			td(style='font-weight:bold') Completed Count: #{completedCount}
+			tr
+			td(style='font-weight:bold') Started Count: #{startCount}
+			tr
+			td(style='font-weight:bold') View Count: #{viewCount}
+
+		table(class='table')
+			tr
+			td(style='font-weight:bold') Question
+			- for (var i=0; i<longestAns; i++)
+				td(style='font-weight:bold') Answer
+				td(style='font-weight:bold') %
+			for q in info
+				tr
+					td #{q.name}
+					-for(var e in q.choice)
+						-var percentage = Math.round((q.choice[e]/q.number)*100)
+						td #{e}
+						td #{percentage}
+
+	form(action='/surveyapp/exportData',method="post")
+		input(type="inputbox"  style="display:none" value="#{surveyID}" name="Data")
+		input(type="submit", value="Export to Excel", id='#{surveyID}', name='Hello')

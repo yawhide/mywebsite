@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	if (success)
+		h2 #{success}
+	form.form-signin(action="/surveyapp/reset/"+id,method="post")
+		h2.form-signin-heading.text-center Please fill your password in.
+		input.form-control.radius-none(id='password' type="password",name="password", placeholder="Password")
+		input.form-control.radius-none-top(id='password2' type="password", name="password2", placeholder="Confirm Password")
+		button(class="btn btn-lg btn-primary btn-block", type="submit") Change Password

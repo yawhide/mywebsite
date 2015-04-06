@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    form.form-profile.form-horizontal.form-validetta(role='form', action='/surveyapp/saveProfile', method='post')
+        h1 Profile
+        p This information appears on your public profile, search results, and beyond.
+        hr
+        .form-group
+            label.col-sm-3.control-label User Name
+            .col-sm-9
+                p.form-control-static #{username}
+        .form-group
+            label.col-sm-3.control-label First Name
+            .col-sm-9
+                input.form-control(type='textbox', placeholder='First Name', name='firstName', value='#{firstName}')
+        .form-group
+            label.col-sm-3.control-label Last Name
+            .col-sm-9
+                input.form-control(type='textbox', placeholder='Last Name', name='lastName', value='#{lastName}')
+        .form-group
+            label.col-sm-3.control-label Email
+            .col-sm-9
+                input.form-control(type='email', placeholder='Email', name='email', value='#{email}', data-validetta='email,required')
+        .form-group
+            label.col-sm-3.control-label Phone
+            .col-sm-9
+                input.form-control(type='tel', placeholder='1 (555) 555-5555', name='phoneNumber', value='#{phoneNumber}', data-validetta='customReg[phoneNumber]')
+        .form-group
+            .col-sm-offset-3.col-sm-9
+                button.btn.btn-default(type='submit', value="Save") Save

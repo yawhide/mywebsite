@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+	form.form-signin.register(action="/surveyapp/register",method="post")
+		h2.form-signin-heading.text-center Register for CT Survey Builder
+		if(errorMsg != undefined)
+			.alert.alert-danger #{errorMsg}
+		input.form-control.radius-none-bottom(type="text", name="username", placeholder="User Name" data-validetta='required', value='#{username}')
+		input.form-control.radius-none(id='email' type="email", name='email', placeholder="Email Address", autocomplete='off', data-validetta='required,email', value='#{email}')
+		input.form-control.radius-none(id='password' type="password",name="password", placeholder="Password", data-validetta='required,minLength[8],customReg[strength]', value='#{password}')
+		input.form-control.radius-none-top(id='password2' type="password", name="password2", placeholder="Confirm Password", data-validetta='required,equal[password]', value='#{password}')
+		button(class="btn btn-lg btn-primary btn-block", type="submit", value="Register" id ="submitRegister") Register

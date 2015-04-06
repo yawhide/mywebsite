@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+    form.form-signin.top-buffer(action="/surveyapp/",method="post", autocomplete='off')
+        if(message == true)
+            .alert.alert-danger Invalid user name or email address.
+        input.form-control.radius-none-bottom(type="text", name="username", placeholder="User Name or Email Address", autofocus="")
+        input.form-control.radius-none-top(type="password", name="password", placeholder="Password")
+        label.checkbox
+            input(type="checkbox", value="remember-me", name="rememberMe")
+            | Remember me &middot;
+            a(href="/surveyapp/forgot") Forgot password?
+        button(class="btn btn-lg btn-primary btn-block", type="submit") Sign in
+        p.text-center
+            | New to SurveyHide?
+            a(href="/surveyapp/register", title="Register to create surveys today!")
+                | Sign up.

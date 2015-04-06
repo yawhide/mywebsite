@@ -16,10 +16,10 @@ app.set('trust proxy', true);
 app.use(favicon());
 app.use(require('morgan')('dev'));
 
-//app.use(require('./portal/app'));
 app.use('/projectyawhide', require('./projectYawHide/app'))
 app.use('/bonified', require('./bonified/app'))
 app.use('/playground', require('./playground/app'))
+app.use('/surveyapp', require('./surveyapp/app'))
 app.use(require('./main/app'))
 
 // development error handler

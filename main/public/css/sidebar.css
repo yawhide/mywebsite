@@ -16,6 +16,12 @@
   font-weight: 700;
 }
 
+.sideBar .sidebar-btn{
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+
 .sideBar ul{
   padding-left: 8px;
 }
@@ -35,7 +41,12 @@
   cursor: default;
 }
 
-.sideBar ul li.highlight{
+.sideBar.highlight-kik .kik,
+.sideBar.highlight-textnow .textnow,
+.sideBar.highlight-match3 .match3,
+.sideBar.highlight-projectyawhide .projectyawhide,
+.sideBar.highlight-bonified .bonified,
+.sideBar.highlight-surveyapp .surveyapp{
   -webkit-box-shadow: 1px 1px 5px 1px rgba(89, 127, 204, 0.8);
   -moz-box-shadow:    1px 1px 5px 1px rgba(89, 127, 204, 0.8);
   box-shadow:         1px 1px 5px 1px rgba(89, 127, 204, 0.8);

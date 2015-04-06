@@ -1,0 +1,90 @@
+extends layout
+
+block content
+	if (user)
+		.row.top-buffer
+			.col-md-12
+				.alert.alert-success.alert-dismiss.fade.in
+					button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
+					| Welcome back #{user.username}!
+	if (collection)
+		h1 Surveys that matched your Query
+		form(action = "/surveyapp/editSurvey/", method="post")
+			if (collection != "None")
+				for result in collection
+					if(!result.deleteFlag)
+						input(type="radio", name="radio" value="#{result._id}")
+						| #{result.surveyName}
+						br
+				br
+				input(class='btn', type="submit", id='start', value="Start", name='start')
+			else
+				p Nothing has matched your query, please try again
+
+	.row
+		.col-sm-6
+			.panel.panel-default
+				.panel-heading Your Surveys
+					a.btn.btn-xs.btn-info.pull-right(href='/surveyapp/new-survey') New Survey
+
+				if(activeSurveys.length == 0)
+					.panel-body
+						p You do not have any surveys to display yet. Would you like to create one?
+
+				else
+					.list-group
+						for result in activeSurveys
+							if(!result.deleteFlag)
+								a.list-group-item(href='/surveyapp/new-survey/#{result._id}')
+									span.badge #{result.teamName}
+									| #{result.surveyName}
+
+		.col-sm-6
+			.panel.panel-default
+				.panel-heading Your Teams
+					a.btn.btn-xs.btn-info.pull-right(href='/surveyapp/teams') New Team
+
+				if(yourTeamSurvey.length == 0)
+					.panel-body
+						p You do not have any teams to display yet. Would you like to create one?
+
+				else
+					.list-group
+						for result in yourTeamSurvey
+							a.list-group-item(href="/surveyapp/teams/#{result._id}")
+								span.badge #{result.surveys.length}
+								| #{result.teamName}
+
+	.row
+		.col-sm-6
+			.panel.panel-default
+				.panel-heading Team Surveys
+
+				if(yourTeamSurvey.length == 0)
+					.panel-body
+						p There are no team surveys to display at this time.
+
+				else
+					div.list-group
+						for result in teamSurvey
+							for i in result.surveys
+								if(!i.deleteFlag)
+									a.list-group-item(href="/surveyapp/new-survey/#{i._id}")
+										span.badge #{result.teamName}
+										| #{i.surveyName}
+
+		.col-sm-6
+			.panel.panel-default
+				.panel-heading New Surveys
+
+				if(newSurveys.length == 0)
+					.panel-body
+						p There are no new surveys to list at this time.
+
+				else
+					div.list-group
+						for result in newSurveys
+							if(!result.deleteFlag)
+								a.list-group-item(href='/surveyapp/new-survey/#{result._id}')
+									span.badge #{result.teamName}
+									| #{result.surveyName}

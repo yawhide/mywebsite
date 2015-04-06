@@ -1,41 +1,41 @@
 <div class="listProjects sb-container">
   <div class="sideBar sb-menu">
-    <h5>Languages</h5>
-    <button ng-click="closeSideBar()"></button>
+    <h5>Languages<span></h5>
+    <button style='display: none;' class='sidebar-btn'>close</button>
     <ul>
-      <li ng-class="{ highlight: tmp }">Android SDK</li>
-      <li ng-class="{ highlight: tmp }">AutoHotKey</li>
-      <li ng-class="{ highlight: tmp }">C</li>
-      <li ng-class="{ highlight: tmp }">C++</li>
-      <li ng-class="{ highlight: bonified || projectyawhide || textnow || match3 }">CSS</li>
-      <li ng-class="{ highlight: bonified || projectyawhide || textnow || match3 || kik }">HTML</li>
-      <li ng-class="{ highlight: kik }">Java</li>
-      <li ng-class="{ highlight: bonified || projectyawhide || textnow || match3 || kik }">JavaScript</li>
-      <li ng-class="{ highlight: kik }">Python</li>
+      <li class="">Android SDK</li>
+      <li class="">AutoHotKey</li>
+      <li class="">C</li>
+      <li class="">C++</li>
+      <li class="bonified projectyawhide textnow match3">CSS</li>
+      <li class="bonified projectyawhide textnow match3 kik surveyapp">HTML</li>
+      <li class="kik">Java</li>
+      <li class="bonified projectyawhide textnow match3 kik surveyapp">JavaScript</li>
+      <li class="kik">Python</li>
     </ul>
     <h5>Frameworks</h5>
     <ul>
-      <li ng-class="{ highlight: textnow }">Angular.js</li>
-      <li ng-class="{ highlight: bonified || projectyawhide || textnow }">Backbone.js</li>
-      <li ng-class="{ highlight: bonified || projectyawhide }">Bootstrap</li>
-      <li ng-class="{ highlight: bonified || projectyawhide || textnow }">jQuery</li>
-      <li ng-class="{ highlight: bonified || projectyawhide || kik }">MongoDB</li>
-      <li ng-class="{ highlight: bonified || projectyawhide || kik }">Mongoose.js</li>
-      <li ng-class="{ highlight: bonified || projectyawhide || textnow || match3 || kik }">Node.js</li>
-      <li ng-class="{ highlight: match3 }">Redis PubSub</li>
-      <li ng-class="{ highlight: textnow }">Require.js</li>
-      <li ng-class="{ highlight: tmp }">Passport.js</li>
-      <li ng-class="{ highlight: match3 }">Socket.io</li>
-      <li ng-class="{ highlight: kik }">Google App Engine</li>
+      <li class="textnow">Angular.js</li>
+      <li class="bonified projectyawhide textnow">Backbone.js</li>
+      <li class="bonified projectyawhide">Bootstrap</li>
+      <li class="bonified projectyawhide textnow surveyapp">jQuery</li>
+      <li class="bonified projectyawhide kik surveyapp">MongoDB</li>
+      <li class="bonified projectyawhide kik surveyapp">Mongoose.js</li>
+      <li class="bonified projectyawhide textnow match3 kik surveyapp">Node.js</li>
+      <li class="match3">Redis PubSub</li>
+      <li class="textnow">Require.js</li>
+      <li class="surveyapp">Passport.js</li>
+      <li class="match3">Socket.io</li>
+      <li class="kik">Google App Engine</li>
     </ul>
     <h5>Tools</h5>
     <ul>
-      <li ng-class="{ highlight: bonified || projectyawhide || textnow || match3 || kik }">Git</li>
-      <li ng-class="{ highlight: textnow || match3 || kik }">Mac OS X</li>
-      <li ng-class="{ highlight: bonified }">PhoneGap</li>
-      <li ng-class="{ highlight: tmp }">Ubuntu</li>
-      <li ng-class="{ highlight: textnow }">WebRTC</li>
-      <li ng-class="{ highlight: kik }">MixPanel</li>
+      <li class="bonified projectyawhide textnow match3 kik surveyapp">Git</li>
+      <li class="textnow match3 kik">Mac OS X</li>
+      <li class="bonified">PhoneGap</li>
+      <li class="">Ubuntu</li>
+      <li class="textnow">WebRTC</li>
+      <li class="kik">MixPanel</li>
     </ul>
   </div>
 
@@ -46,7 +46,7 @@
 
         <h2>Internships</h2>
 
-        <div class="listProjectItem" ng-mouseenter="kik = true" ng-mouseleave="kik = false">
+        <div class="listProjectItem" data-project='kik'>
           <img src='img/Kik-logo2.png' width='70'>
           <p>Worked on the Kik Points team</p>
           <ul>
@@ -56,10 +56,10 @@
             <li>Fixed numerous bugs in the messaging app /messaging</li>
           </ul>
 
-          <a ng-href="https://points.kik.com" target="_blank">Kik Points</a>
+          <a href="https://points.kik.com" target="_blank">Kik Points</a>
         </div>
 
-        <div class="listProjectItem" ng-mouseenter="textnow = true" ng-mouseleave="textnow = false">
+        <div class="listProjectItem" data-project='textnow'>
           <img src='img/textnow.png' width='50'>
           <p>My contributions to TextNow.com (as a co-op)</p>
           <ul>
@@ -69,12 +69,12 @@
             <li>Fixed numerous bugs in the messaging app /messaging</li>
           </ul>
 
-          <a ng-href="https://www.textnow.com" target="_blank">TextNow</a>
+          <a href="https://www.textnow.com" target="_blank">TextNow</a>
         </div>
 
         <h2>Projects</h2>
 
-        <div class="listProjectItem" ng-mouseenter="match3 = true" ng-mouseleave="match3 = false">
+        <div class="listProjectItem" data-project='match3'>
           <h3>Match-3<span class="superscriptText green">Completed</span></h3></h3>
           <p>Mobile browser based tile matching game</p>
           <ul>
@@ -83,19 +83,25 @@
             <li>Finished top 3 in the Kik 2014 Hackathon</li>
           </ul>
 
-          <a ng-href="http://match-3.herokuapp.com/" target="_blank">Match-3 (Play on a phone for best experience)</a>
+          <a href="http://match-3.herokuapp.com/" target="_blank">Match-3 (Play on a phone for best experience)</a>
         </div>
 
-        <div class="listProjectItem" ng-mouseenter="projectyawhide = true" ng-mouseleave="projectyawhide = false">
+        <div class="listProjectItem" data-project='surveyapp'>
+          <h3>Survey App<span class="superscriptText red">Stopped development</span></h3>
+          <p>An almost complete survey app. You can register, make teams, invite people into your teams by username or email and, of course, create surveys!</p>
+          <a href="/surveyapp" target="_blank">Survey App</a>
+        </div>
+
+        <div class="listProjectItem" data-project='projectyawhide'>
           <h3>Project Sobeys<span class="superscriptText red">Stopped development</span></h3>
           <p>Changes the way you shop at Sobey's. It shows you an organized version of the Sobey's Flyer so you can find the best deals faster then ever before</p>
-          <a ng-href="/projectyawhide" target="_blank">Project Sobeys</a>
+          <a href="/projectyawhide" target="_blank">Project Sobeys</a>
         </div>
 
-        <div class="listProjectItem" ng-mouseenter="bonified = true" ng-mouseleave="bonified = false">
+        <div class="listProjectItem" data-project='bonified'>
           <h3>Bonified<span class="superscriptText green">Completed</span></h3>
           <p>An easy to play memory game where you're asked to keep track of past letters while constantly adding one more</p>
-          <a ng-href="/bonified" target="_blank">Bonified</a>
+          <a href="/bonified" target="_blank">Bonified</a>
         </div>
 
       </div>
