@@ -34,7 +34,7 @@ forEach($projects, function (index, element) {
 
 
 document.onscroll = function (){
-  if(window.scrollY > 150)
+  if(window.pageYOffset > (window.innerWidth > 992 ? 86 : 130))
     $sidebar.classList.add('sticky-sidebar')
   else
     $sidebar.classList.remove('sticky-sidebar')
