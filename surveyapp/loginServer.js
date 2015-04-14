@@ -13,8 +13,8 @@ var transport = nodemailer.createTransport("SMTP", {
                             // If you are using @gmail.com address, then you don't
                             // even have to define the service name
         auth: {
-            user: "aliandfila1@gmail.com",
-            pass: "aliandfila"
+            user: "rshashtable@gmail.com",
+            pass: "lascannon"
         }
     });
 
@@ -36,10 +36,10 @@ var makeFunction = function(user, id)
 		subject: 'SurveyApp - Change Password', //
 
 		// plaintext body
-		text: 'Please follow this link to reset your password ' +'localhost:3000/reset/'+id,
+		text: 'Please follow this link to reset your password yawhide.com/surveyapp/reset/'+id,
 
 		// HTML body
-		html:'<p>Please follow this link to reset your password ' + 'localhost:3000/reset/' + id + '</p>'
+		html:'<p>Please follow this link to reset your password yawhide.com/surveyapp/reset/' + id + '</p>'
 	};
 }
 
@@ -172,24 +172,22 @@ module.exports = function (app) {
 				var tempID = result._id;
 				Reset.createReset(tempID, function(err, result1) {
 					if (err) {}
-						else
-						{
-							console.log('Sending Mail');
-							message = makeFunction(req.body.email,result1._id);
-							transport.sendMail(message, function(error){
-								if(error){
-									console.log('Error occured');
-									console.log(error.message);
-									return;
-								}
-								console.log('Message sent successfully!');
-
-			// if you don't want to use this transport object anymore, uncomment following line
-			//transport.close(); // close the connection pool
-		});
-							res.render('forgot', { result : 'Email has been sent!'});
-						}
-					});
+					else {
+						console.log('Sending Mail');
+						message = makeFunction(req.body.email,result1._id);
+						transport.sendMail(message, function (error){
+							if(error){
+								console.log('Error occured');
+								console.log(error.message);
+								transport.close();
+								return;
+							}
+							console.log('Message sent successfully!');
+							transport.close(); // close the connection pool
+						});
+						res.render('forgot', { result : 'Email has been sent!'});
+					}
+				});
 			}
 		});
 	});

@@ -3,7 +3,7 @@ extends layout
 block content
 
 	form.form-signin.register(action="/surveyapp/register",method="post")
-		h2.form-signin-heading.text-center Register for CT Survey Builder
+		h2.form-signin-heading.text-center Register for Survey Hide
 		if(errorMsg != undefined)
 			.alert.alert-danger #{errorMsg}
 		input.form-control.radius-none-bottom(type="text", name="username", placeholder="User Name" data-validetta='required', value='#{username}')
