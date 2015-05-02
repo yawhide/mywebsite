@@ -9,6 +9,7 @@
   -ms-transition: transform 0.5s;
   -webkit-transition: transform 0.5s;
   transition: transform 0.5s;
+  display: none;
 }
 
 .sideBar.sticky-sidebar{
@@ -67,8 +68,6 @@
 }
 
 .sb-pusher{
-  position: absolute;
-  left: 210px;
   -moz-transition: transform 0.5s;
   -ms-transition: transform 0.5s;
   -webkit-transition: transform 0.5s;
@@ -84,4 +83,15 @@
   -ms-transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
+}
+
+@media ( min-width: 500px){
+  .sb-menu {
+    display: block;
+  }
+  
+  .sb-pusher {
+    left: 210px;
+    position: absolute;
+  }
 }

@@ -192,6 +192,7 @@ module.exports = function (app) {
 					Survey.updateAnswer(s, function (err) {
 						if (err){
 							console.log('error submitting survey');
+							console.error(err);
 						}
 						else{
 							Survey.getSurveybyID(req.params.id, function (err, collection){

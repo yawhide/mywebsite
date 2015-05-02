@@ -9,7 +9,7 @@ jQuery(function($){
 
 			$.ajax({
 				type: "POST",
-				url: "/surveyapp/incStartCount/"+url.substr(num+7),
+				url: "/surveyapp/incStartCount"+url.substr(num+7),
 				data: { startCount : true }
 			})
 			.done(function(msg){
