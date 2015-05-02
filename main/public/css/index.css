@@ -4,6 +4,13 @@ body.body{
   font-family: Raleway;
 }
 
+.sb-content h1 {
+  font-family: Raleway;
+  font-weight: 600;
+  text-align: center;
+  color: #e56923;
+}
+
 .green{
   color: green;
 }
@@ -17,15 +24,15 @@ body.body{
 }
 
 .listProjectItem{
-  background-color: #F0F0F0;;
   padding: 10px;
-  margin: 10px;
+  margin: 0 auto;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
   cursor: pointer;
+  max-width: 282px;
 }
 
 .internal{
@@ -45,17 +52,53 @@ body.body{
 
 .listProjectItem .image-wrapper .match-3-image {
   background-image: url(/img/match-3.png);
-  height: 400px;
+  height: 395px;
   width: 100%;
   background-repeat: no-repeat;
-  background-position-x: -212px;
-  background-position-y: -18px;
+  background-position-x: 50%;
+  background-position-y: -20px;
+  border: 1px solid #112233;
+}
+
+.listProjectItem .image-wrapper {
+  height: 390px;
+  overflow: hidden;
+  border: 1px solid #999999;
+}
+
+.listProjectItem .image-wrapper .survey-hide-image {
+  width: 100%;
+}
+
+.listProjectItem .image-wrapper .project-sobeys-image {
+  width: 100%;
+}
+
+.listProjectItem .image-wrapper .bonified-image {
+  width: 100%;
+  transform: translateY(-40px);
 }
 
 .listProjectItem .body {
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .listProjectItem .body .title {
-  font-size: 36px;
+  font-size: 28px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.listProjectItem .body .date {
+  font-size: 18px;
+  float: right;
+  padding-top: 8px;
+}
+
+.listProjectItem .body .languages {
+}
+
+.listProjectItem .body .languages div {
+  display: inline-block;
+  padding: 5px 8px;
 }
