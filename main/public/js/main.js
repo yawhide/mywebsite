@@ -20,17 +20,17 @@ $sidebarBtn.onclick = function (){
     $sidebarContainer.classList.add('sb-effect')
 }
 
-// forEach($projects, function (index, element) {
-//   element.onmouseenter = function (){
-//     $highlighter.classList.add('highlight-' + element.dataset.project)
-//   }
-//   element.onmouseleave = function (){
-//     $highlighter.classList.remove('highlight-' + element.dataset.project)
-//   }
-//   element.onclick = function (){
-//     window.open(element.dataset.url, '_blank')
-//   }
-// });
+forEach($projects, function (index, element) {
+  element.onmouseenter = function (){
+    $highlighter.classList.add('highlight-' + element.dataset.project)
+  }
+  element.onmouseleave = function (){
+    $highlighter.classList.remove('highlight-' + element.dataset.project)
+  }
+  element.onclick = function (){
+    window.open(element.dataset.url, '_blank')
+  }
+});
 
 
 document.onscroll = function (){

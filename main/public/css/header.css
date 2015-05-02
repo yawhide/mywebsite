@@ -1,3 +1,17 @@
 .header{
   text-align: center;
 }
+
+.row .col-md-4{
+  display: inline-block;
+  width: 33%;
+}
+
+a.internal{
+  text-decoration: none;
+  color: #337ab7;
+}
+
+a.internal:hover{
+  text-decoration: underline;
+}

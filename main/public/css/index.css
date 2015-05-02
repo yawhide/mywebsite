@@ -4,6 +4,11 @@ body.body{
   font-family: Raleway;
 }
 
+.sb-content .internships {
+  border-bottom: 1px solid #EEE;
+  margin-bottom: 0.67em;
+}
+
 .sb-content h1 {
   font-family: Raleway;
   font-weight: 600;
@@ -24,15 +29,14 @@ body.body{
 }
 
 .listProjectItem{
-  padding: 10px;
-  margin: 0 auto;
+  margin: 0 15px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
   cursor: pointer;
-  max-width: 282px;
+  margin-bottom: 60px
 }
 
 .internal{
@@ -47,7 +51,10 @@ body.body{
 }
 
 .listProjectItem .image-wrapper {
-
+  overflow: hidden;
+  height: 300px;
+  width: 250px;
+  margin: 0 auto;
 }
 
 .listProjectItem .image-wrapper .match-3-image {
@@ -56,14 +63,15 @@ body.body{
   width: 100%;
   background-repeat: no-repeat;
   background-position-x: 50%;
-  background-position-y: -20px;
   border: 1px solid #112233;
 }
 
 .listProjectItem .image-wrapper {
-  height: 390px;
-  overflow: hidden;
   border: 1px solid #999999;
+}
+
+.listProjectItem .image-wrapper:last-child{
+  background-color: #eeeeee;
 }
 
 .listProjectItem .image-wrapper .survey-hide-image {
@@ -76,11 +84,10 @@ body.body{
 
 .listProjectItem .image-wrapper .bonified-image {
   width: 100%;
-  transform: translateY(-40px);
 }
 
 .listProjectItem .body {
-  padding: 10px 0;
+  padding: 10px;
 }
 
 .listProjectItem .body .title {
