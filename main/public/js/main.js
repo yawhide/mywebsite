@@ -34,10 +34,12 @@ forEach($projects, function (index, element) {
 
 
 document.onscroll = function (){
-  if(window.pageYOffset > (window.innerWidth > 992 ? 86 : 130))
-    $sidebar.classList.add('sticky-sidebar')
-  else
-    $sidebar.classList.remove('sticky-sidebar')
+  if(window.innerWidth > 830){
+    if(window.pageYOffset > 86)
+      $sidebar.classList.add('sticky-sidebar')
+    else
+      $sidebar.classList.remove('sticky-sidebar')
+  }
 }
 
 function forEach(array, callback, scope) {

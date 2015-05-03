@@ -3,8 +3,8 @@
 }
 
 .row .col-md-4{
-  display: inline-block;
-  width: 33%;
+  display: block;
+  width: 100%
 }
 
 a.internal{
@@ -14,4 +14,11 @@ a.internal{
 
 a.internal:hover{
   text-decoration: underline;
+}
+
+@media (min-width: 840px){
+  .row .col-md-4{
+    display: inline-block;
+    width: 33%;
+  }
 }
