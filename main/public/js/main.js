@@ -11,6 +11,9 @@ var projects = {
   'highlight-match-3': 'match-3',
   'highlight-projectyawhide': 'projectyawhide',
   'highlight-bonified': 'bonified',
+  'highlight-hop': 'hop',
+  'highlight-htn': 'htn',
+  'highlight-surveyapp': 'surveyapp',
 }
 
 $sidebarBtn.onclick = function (){
