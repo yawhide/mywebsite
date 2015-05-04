@@ -1,7 +1,7 @@
 .sideBar{
   left: 0;
   position: absolute;
-  width: 200px;
+  width: 215px;
   margin-left: 15px;
   border-right: 1px solid #EEE;
   margin-right: 10px;
@@ -14,7 +14,7 @@
 
 .sideBar.sticky-sidebar{
   position: fixed;
-  top: 30px;
+  top: 10px;
 }
 
 .sideBar h5{
@@ -92,7 +92,7 @@
   }
 
   .sb-pusher {
-    left: 210px;
+    left: 230px;
     position: absolute;
   }
 }

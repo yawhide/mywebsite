@@ -32,7 +32,8 @@ forEach($projects, function (index, element) {
       $highlighter.classList.remove('highlight-' + element.dataset.project)
     }
     element.onclick = function (){
-      window.open(element.dataset.url, '_blank')
+      if(element.dataset && element.dataset.url)
+        window.open(element.dataset.url, '_blank')
     }
   }
 });
@@ -40,7 +41,7 @@ forEach($projects, function (index, element) {
 
 document.onscroll = function (){
   if(window.innerWidth > 830){
-    if(window.pageYOffset > 86)
+    if(window.pageYOffset > 106)
       $sidebar.classList.add('sticky-sidebar')
     else
       $sidebar.classList.remove('sticky-sidebar')
