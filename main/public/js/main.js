@@ -21,14 +21,16 @@ $sidebarBtn.onclick = function (){
 }
 
 forEach($projects, function (index, element) {
-  element.onmouseenter = function (){
-    $highlighter.classList.add('highlight-' + element.dataset.project)
-  }
-  element.onmouseleave = function (){
-    $highlighter.classList.remove('highlight-' + element.dataset.project)
-  }
-  element.onclick = function (){
-    window.open(element.dataset.url, '_blank')
+  if (element.dataset.project){
+    element.onmouseenter = function (){
+      $highlighter.classList.add('highlight-' + element.dataset.project)
+    }
+    element.onmouseleave = function (){
+      $highlighter.classList.remove('highlight-' + element.dataset.project)
+    }
+    element.onclick = function (){
+      window.open(element.dataset.url, '_blank')
+    }
   }
 });
 

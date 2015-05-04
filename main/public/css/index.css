@@ -4,12 +4,12 @@ body.body{
   font-family: Raleway;
 }
 
-.sb-content .internships {
+.sb-content .internships{
   border-bottom: 1px solid #EEE;
   margin-bottom: 0.67em;
 }
 
-.sb-content h1 {
+.sb-content h1{
   font-family: Raleway;
   font-weight: 600;
   text-align: center;
@@ -50,14 +50,14 @@ body.body{
   margin-bottom: 10px;
 }
 
-.listProjectItem .image-wrapper {
+.listProjectItem .image-wrapper{
   overflow: hidden;
   height: 300px;
   width: 250px;
   margin: 0 auto;
 }
 
-.listProjectItem .image-wrapper .match-3-image {
+.listProjectItem .image-wrapper .match-3-image{
   background-image: url(/img/match-3.png);
   height: 395px;
   width: 100%;
@@ -66,7 +66,7 @@ body.body{
   border: 1px solid #112233;
 }
 
-.listProjectItem .image-wrapper {
+.listProjectItem .image-wrapper{
   border: 1px solid #999999;
 }
 
@@ -74,38 +74,82 @@ body.body{
   background-color: #eeeeee;
 }
 
-.listProjectItem .image-wrapper .survey-hide-image {
+.listProjectItem .image-wrapper.htn-image{
+  width: 240px;
+}
+
+.listProjectItem .image-wrapper .survey-hide-image{
   width: 100%;
 }
 
-.listProjectItem .image-wrapper .project-sobeys-image {
+.listProjectItem .image-wrapper .project-sobeys-image{
   width: 100%;
 }
 
-.listProjectItem .image-wrapper .bonified-image {
+.listProjectItem .image-wrapper .bonified-image{
   width: 100%;
 }
 
-.listProjectItem .body {
+.listProjectItem .body{
   padding: 10px;
 }
 
-.listProjectItem .body .title {
+.listProjectItem .body .title{
   font-size: 28px;
   font-weight: 600;
   display: inline-block;
 }
 
-.listProjectItem .body .date {
+.listProjectItem .body .date{
   font-size: 18px;
   float: right;
-  padding-top: 8px;
+  padding-top: 7px;
 }
 
-.listProjectItem .body .languages {
+.listProjectItem .body .languages{
 }
 
-.listProjectItem .body .languages div {
+.listProjectItem .body .languages div{
   display: inline-block;
   padding: 5px 8px;
+}
+
+@media (max-width: 359px){
+  .listProjectItem .body .title{
+    font-size: 24px;
+  }
+
+  .listProjectItem .body .date{
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px){
+  .listProjectItem{
+    height: 300px;
+  }
+
+  .listProjectItem .image-wrapper{
+    margin: 0;
+    float: left;
+    margin-right: 20px;
+  }
+
+  .listProjectItem .body{
+    padding: 0;
+  }
+
+  .listProjectItem .body .short-description{
+
+  }
+
+  .listProjectItem .body .long-description{
+  }
+}
+
+@media ( min-width: 840px){
+  .listProjectItem .body .languages{
+    display: none;
+  }
+
 }
