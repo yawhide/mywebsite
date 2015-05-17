@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	if (result)
+		h2.form-signin-heading.text-center #{result}
+	form.form-signin(action="/surveyhide/forgot",method="post")
+		h2.form-signin-heading.text-center Please fill in the appropriate fields
+		input.form-control.radius-none-top(type="email", name="email", placeholder="Email Address", autofocus="" required)
+		button(class="btn btn-lg btn-primary btn-block", type="submit") Submit Request
+		p.text-center
+			| New to SurveyHide?
+			a(href="/surveyhide/register", title="Register to create surveys today!")
+				| Sign up.

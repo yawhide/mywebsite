@@ -19,7 +19,7 @@ app.use(require('morgan')('dev'));
 app.use('/projectyawhide', require('./projectYawHide/app'))
 app.use('/bonified', require('./bonified/app'))
 app.use('/playground', require('./playground/app'))
-app.use('/surveyapp', require('./surveyapp/app'))
+app.use('/surveyhide', require('./surveyhide/app'))
 app.use(require('./main/app'))
 
 // development error handler

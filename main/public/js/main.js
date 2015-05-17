@@ -13,7 +13,7 @@ var projects = {
   'highlight-bonified': 'bonified',
   'highlight-hop': 'hop',
   'highlight-htn': 'htn',
-  'highlight-surveyapp': 'surveyapp',
+  'highlight-surveyhide': 'surveyhide',
 }
 
 $sidebarBtn.onclick = function (){

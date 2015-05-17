@@ -1,0 +1,51 @@
+header.navbar.navbar-default.navbar-fixed-top(role="banner")
+    .container
+        .navbar-header
+            button.navbar-toggle(type="button", data-toggle="collapse", data-target=".bs-navbar-collapse")
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.navbar-brand(href="/surveyhide/") SurveyHide
+
+        nav.collapse.navbar-collapse.bs-navbar-collapse(role="navigation")
+
+            ul.nav.navbar-nav.navbar-right
+                if (typeof(user) == 'undefined')
+                    li
+                        a(href="/surveyhide/register") Register
+                else
+                    li.dropdown
+                        a.dropdown-toggle(href="/surveyhide#", data-toggle="dropdown") Create
+                            b.caret
+                        ul.dropdown-menu
+                            li
+                                a(href="/surveyhide/new-survey") new survey
+                            li
+                                a(href="/surveyhide/teams") new team
+                    li.dropdown
+                        a.dropdown-toggle(href="/surveyhide#", data-toggle="dropdown") Edit
+                            b.caret
+                        ul.dropdown-menu
+                            li
+                                a(href="/surveyhide/my-surveys") surveys
+                            li
+                                a(href="/surveyhide/teams") teams
+                    li.dropdown
+                        a.dropdown-toggle(href="/surveyhide#", data-toggle="dropdown") Settings
+                            b.caret
+                        ul.dropdown-menu
+                            li
+                                a(href="/surveyhide/profile") profile
+                            li
+                                a(href="/surveyhide/change-password") password
+                            li
+                                a(href="/surveyhide/teams") teams
+                            li
+                                a(href="/surveyhide/my-surveys") surveys
+                            li
+                                a(href="/surveyhide/logout") sign out
+
+                    li
+                        form.navbar-form.form-validetta(role='search', action='/surveyhide/search', method='post')
+                            input#srch-term.form-control.input-sm(type="search", result="5", name="queryName", placeholder="Search", data-validetta='required')

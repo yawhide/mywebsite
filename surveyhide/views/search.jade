@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	if(searchResults)
+		form.form-profile.form-horizontal(role='form', action='/surveyhide/')
+			.modal.fade.no-trigger
+				.modal-dialog
+					.modal-content
+						.modal-header
+							h4.modal-title Search Produces No Results
+						.modal-body
+							p Your search produced no results. Please go back and try a different search.
+						.modal-footer
+							button.btn.btn-info(type='submit') Back
+	form.form-profile.form-horizontal(role='form', action='/surveyhide/editSurvey', method='post')
+		for result in list
+			input(type='radio', name='radio' value='#{result._id}')
+			| #{result.surveyName}
+			br
+		.btn-group
+			input(class='btn btn-default', type='submit', id='edit', value='Edit', name='edit')
+			&nbsp;
+			input(class='btn btn-default', type='submit', id='start', value='Start', name='start')
+			&nbsp;
+			input(class='btn btn-default', type='submit', id='stat', value='Statistics', name='stat')
+			&nbsp;
+			input(class='btn btn-default', type='submit', id='preview', value='Preview', name='preview')
+			br
+			a.btn.btn-primary(href='/surveyhide/') Back

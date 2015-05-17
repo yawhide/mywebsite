@@ -1,0 +1,43 @@
+extends layout
+
+block content
+	if(collection.length >= 1)
+		.row.top-buffer
+			.col-sm-12
+				.panel.panel-default
+					.panel-heading My Surveys
+						a.btn.btn-xs.btn-info.pull-right(href='/surveyhide/new-survey') New Survey
+					ul.list-group
+						for result in collection
+							if(!result.deleteFlag)
+								li.list-group-item
+									form(role='form', action='/surveyhide/editSurvey', method='post')
+										.row
+											.col-xs-12.col-sm-3.col-md-4.col-lg-5
+												p #{result.surveyName}
+												input(type='hidden', name='radio' value='#{result._id}')
+											.col-xs-12.col-sm-9.col-md-8.col-lg-7
+												.row
+													.col-xs-2.col-xs-offset-0.col-sm-offset-2
+														input.btn.btn-xs.btn-default(type='submit', value='Edit', name='edit')
+													.col-xs-2.col-md-2
+														input.btn.btn-xs.btn-success(type='submit',, value='Start', name='start')
+													.col-xs-2.col-md-2
+														input.btn.btn-xs.btn-info(type='submit', value='Stats', name='stat')
+													.col-xs-2.col-md-2
+														input.btn.btn-xs.btn-primary(type='submit', value='View', name='preview')
+													.col-xs-2.col-md-2
+														input.btn.btn-xs.btn-danger(type='submit', value='Delete', name='deleteFlag')
+
+	else
+		form.form-profile.form-horizontal(role='form', action='/surveyhide/new-survey')
+			.modal.fade.no-trigger
+				.modal-dialog
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+							h4.modal-title No Surveys Detected
+						.modal-body
+							p You have not created any surveys yet. Would you like to create one now?
+						.modal-footer
+							button.btn.btn-info(type='submit') New Survey
