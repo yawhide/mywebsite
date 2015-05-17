@@ -41,8 +41,6 @@ var isEmptyObject = function (obj) {
     return true;
 }
 
-
-
 //when the root route is called, do our mobile check
 app.get('/index', function (req, res){
   // var htmlString = $("div.card-inset").html();
@@ -56,6 +54,171 @@ app.get('/mobile', function (req, res){
 var date;
 var data = {}
 , div = 'div.card > div.card-plain > div.card-inset > table > ';
+
+app.get('/makeFlyer', function (req, res){
+	Store.getAllStores(function (err, stores){
+		if(err) throw err;
+		console.log(stores.length);
+		var z = 0;
+		(function loop(){
+			if(z < stores.length){
+				Item.getItemFromUrlNum(stores[z].urlNumber, function (err2, items){
+					if(err2) throw err2;
+					Store.makeFlyer(stores[z], items, function (err3){
+						if(err3) throw err3;
+						console.log(z);
+						z++;
+						loop();
+					});
+				});
+			}
+			else{
+				console.log('done');
+				res.end();
+			}
+		}());
+	});
+});
+
+var sortBestPercent = function (ob, cb){
+	ob.sort(function (a,b){
+		return b.bestPercent-a.bestPercent;
+	});
+	cb(ob);
+}
+
+var sortBestSav = function (ob, cb){
+	ob.sort(function (a,b){
+		return b.bestSav-a.bestSav;
+	});
+	cb(ob);
+}
+
+var addCategoriesToItem = function(categories, flyer, cb){
+	var catKeys = Object.keys(categories);
+	catKeys .splice(0, 1);
+	for (var i = catKeys.length - 1; i >= 0; i--) {
+		var foodObjectArray = categories[catKeys[i]];
+		for (var j = foodObjectArray.length - 1; j >= 0; j--){
+			var itemName = foodObjectArray[j].item;
+			for (var k = flyer.length - 1; k >= 0; k--) {
+				if(flyer[k].item ==itemName){
+					flyer[k].categories = catKeys[i];
+				}
+			};
+		};
+	};
+cb(flyer);
+}
+
+app.get('/getNearestStores/:elat/:elong/:maxD', function (req, res){
+    var elat = req.params.elat;
+    var elong = req.params.elong;
+
+
+    var maxD = req.params.maxD/111;
+    //maxD = 10/111
+    console.log(elong+ " " + elat + " " + maxD);
+	Store.getNearestStores( elong ,elat,maxD,function (err, flyer){
+		if(err){
+			console.log("there was an error");
+		}
+		else{
+			console.log('result is: ')
+			console.log(flyer.length);
+			for (var i = flyer.length - 1; i >= 0; i--) {
+				console.log(flyer[i].storeName);
+			};
+			res.send(flyer);
+		}
+	});
+});
+
+app.get('/GetNearestByPostal/:postal/:maxD', function (req, res){
+
+});
+
+app.get('/viewFlyer/:url', function (req, res){
+	Store.getStoreByUrlNum(req.params.url, function (err, store){
+		var ob = {};
+		ob.storeName = store.storeName;
+		ob.storeLocation = store.storeLocation;
+		ob.urlNumber = store.urlNumber;
+		ob.city = store.city;
+		ob.postalCode = store.postalCode;
+		ob.storeHours = store.storeHours;
+		ob.location = store.location;
+		ob.currentInterval =store.currentInterval;
+		ob.currFlyerDate = store.currFlyerDate;
+		ob.regularFlyer = store.currFlyer;
+		ob.categories = store.categories;
+		/** here i have to give sortBestPercent a clone of the currFlyer or else
+		sort will just mutate the original flyer which isn't good */
+		ob.bestPercentFlyer = ce.clone(store.currFlyer)
+		ob.bestSavFlyer = ce.clone(store.currFlyer)
+
+		res.send(ob);
+	});
+});
+
+app.get('/getAllStores', function (req, res){
+
+	Store.getAllStores(function (err, flyer){
+		if(err){
+			console.log("there was an error");
+		}
+		else{
+			console.log('this is the flyer');
+			//console.log(flyer)
+			res.send(flyer);
+		}
+	});
+});
+
+
+app.get('/getSobeyFlyer/:id', function (req, res){
+	Store.getStoreByUrlNum(req.params.id, function (err, store){
+
+		if (err) res.send(500, 'could not get store by number')
+		else{
+			res.send(store);
+		}
+	})
+});
+
+var test = [
+	{'sav': 'save up to $3.97', 'price': '3/$20.00'}
+	, {'sav': 'save up to $2.50/lb', 'price': '$8.99/lb'}
+	, {'sav': 'save up to $0.9/lb', 'price': '$5.49/lb'}
+	, {'sav': 'save up to $0.79', 'price': '2/$4.00'}
+	, {'sav': 'save up to $0.97 on 3', 'price': '3/$5.00'}
+	, {'sav': 'this week', 'price': '$9.99/ea.'}
+	, {'sav': 'save up to $0.70/lb,ea', 'price': '$1.79/lb'}
+	, {'sav': 'save $0.30', 'price': '$0.99/ea'}
+	, {'sav': 'save up to $9.77 on 3', 'price': '3/$9.99'}
+	, {'sav': 'save up to $3.00', 'price': '$12.99/ea'}
+	, {'sav': 'save $0.20/100g', 'price': '$1.79/100g'}
+	, {'sav': '', 'price': '$3.35/100g'}
+	, {'sav': 'save up to $0.30', 'price': '$0.69/ea'}
+	, {'sav': 'save this week', 'price': 'noPrice15%off'}
+	]
+
+app.get('/deal', function (req, res){
+	var info = [];
+	for (var y = test.length - 1; y>= 0; y--) {
+		getBest(test[y], function (percent, sav, extra){
+			var ob = {};
+			ob.bestPercent = percent;
+			ob.bestSav = sav;
+			ob.extra = extra;
+			info.push(ob);
+		});
+	};
+	console.log('info is: ');
+	console.log(info);
+	res.end();
+});
+
 
 var getBest = function (ob, cb){
 	var bestPercent = 0
@@ -85,7 +248,7 @@ var getBest = function (ob, cb){
 				bestPercent = Math.round(tmp / (tmp + (splitted[1] / splitted[0]))*100);
 				extra = 'price has n for some price deal'
 			}
-			
+
 		}
 		/** tests if sav does have a 3*/
 		else{
@@ -135,7 +298,7 @@ var getBest = function (ob, cb){
 			bestSav = tmp;
 			bestPercent = Math.round(tmp / (tmp2 + tmp)*100);
 			extra = 'has simple price and simple savings';
-		}		
+		}
 	}
 
 	cb(bestPercent, bestSav, extra);
@@ -143,27 +306,27 @@ var getBest = function (ob, cb){
 
 app.get('/readLocalPartsSobeys', function (req, res){
 	var latestFolder;
-	fs.readdir('./projectYawHide/sobeysFlyerPart/', function (err, folders){
+	fs.readdir('./projectsobeys/sobeysFlyerPart/', function (err, folders){
 		if (err) throw err;
 		/** always gets the last folder in ./sobeys/
 			because it sorts it by created date (or last mod prob)
 			*/
 		latestFolder = folders[folders.length -1];
-		fs.readdir('./projectYawHide/sobeysFlyerPart/' + latestFolder + '/', function (err2, folders2){
+		fs.readdir('./projectsobeys/sobeysFlyerPart/' + latestFolder + '/', function (err2, folders2){
 			if (err2) throw err2;
 			console.log(latestFolder);
 			/** this is each store's flyer */
 			folders2.forEach(function (h){
-				fs.readdir('./projectYawHide/sobeysFlyerPart/'+latestFolder + '/' + h + '/', function (err3, folders3){
+				fs.readdir('./projectsobeys/sobeysFlyerPart/'+latestFolder + '/' + h + '/', function (err3, folders3){
 					if(err3)throw err3;
 					/** this is each flyer part */
 					var info = []
 					, dateOb = {};
 					async.map(folders3, function (flyerPart, complete) {
-     					
-     					fs.readFile('./projectYawHide/sobeysFlyerPart/'+latestFolder + '/' + h + '/' + flyerPart, 'utf8', function (err4, data){
+
+     					fs.readFile('./projectsobeys/sobeysFlyerPart/'+latestFolder + '/' + h + '/' + flyerPart, 'utf8', function (err4, data){
      						if (err4) throw err4;
-							/** this is each 14 departments parts of a flyer 
+							/** this is each 14 departments parts of a flyer
 
 								bakery = 49
 								beverage = 56
@@ -282,7 +445,7 @@ app.get('/readLocalPartsSobeys', function (req, res){
 									for (var i = html.children.length - 1; i >= 0; i--) {
 
 										if(html.children[i].type === 'tag') {
-											var class1 = html.children[i];											
+											var class1 = html.children[i];
 											/** this finds url specifically from selecting a chain of classes */
 											if(class1.attribs.class === 'card-image'){
 												url = class1.attribs.style.split(' ')[1].substr(5);
@@ -342,7 +505,7 @@ app.get('/readLocalPartsSobeys', function (req, res){
 																		}
 																	}
 																	else if (class3.attribs.class.indexOf('price-promos')) {
-																		
+
 																		if(class3.children.length > 1){
 
 																			if(class3.children[1].children.length > 1){
@@ -416,7 +579,7 @@ app.get('/readLocalPartsSobeys', function (req, res){
 							Store.addCategoryParts(h, info.sort(), dateOb, function (err6){
 
 								if(err6) throw err6;
-								
+
 								if(h > 289)
 									console.log('done');
 								else{
@@ -456,7 +619,7 @@ app.get('/makeStoreSobeys', function (req, res){
 								i.children.forEach(function (j){
 									if(j.data !== '\n'){
 										if(j.attribs['class'].indexOf('grid__item') > -1){
-											
+
 											j.children.forEach(function (k){
 												if(k.data !== '\n'){
 													if(k.attribs['class'] === 'palm--hide'){
@@ -489,12 +652,12 @@ app.get('/makeStoreSobeys', function (req, res){
 														count2 = 0;
 													}
 													if(count3 == 6){
-														storenum = 	k.children[0].data.split('\n')[1];					
+														storenum = 	k.children[0].data.split('\n')[1];
 													}
 													count3++;
 												}
 											});
-										}										
+										}
 									}
 								});
 								count3 = 0;
@@ -519,7 +682,7 @@ app.get('/makeStoreSobeys', function (req, res){
 						var prevDay = '';
 						html.children.forEach(function (i){
 							if(typeof(i.data.children) !== 'undefined' && i.data !== '\n' && i.data !== ''){
-									
+
 								var whole = i.children[0].data.split(' ');
 								if(whole.length == 5){
 									hours[prevDay] = i.children[0].data;
@@ -580,7 +743,7 @@ app.get('/makeStoreSobeys2', function (req, res){
 								i.children.forEach(function (j){
 									if(j.data !== '\n'){
 										if(j.attribs['class'].indexOf('grid__item') > -1){
-											
+
 											j.children.forEach(function (k){
 												if(k.data !== '\n'){
 													if(k.attribs['class'] === 'palm--hide'){
@@ -613,12 +776,12 @@ app.get('/makeStoreSobeys2', function (req, res){
 														count2 = 0;
 													}
 													if(count3 == 6){
-														storenum = 	k.children[0].data.split('\n')[1];					
+														storenum = 	k.children[0].data.split('\n')[1];
 													}
 													count3++;
 												}
 											});
-										}										
+										}
 									}
 								});
 								count3 = 0;
@@ -643,7 +806,7 @@ app.get('/makeStoreSobeys2', function (req, res){
 						var prevDay = '';
 						html.children.forEach(function (i){
 							if(typeof(i.data.children) !== 'undefined' && i.data !== '\n' && i.data !== ''){
-									
+
 								var whole = i.children[0].data.split(' ');
 								if(whole.length == 5){
 									hours[prevDay] = i.children[0].data;
@@ -678,212 +841,6 @@ app.get('/makeStoreSobeys2', function (req, res){
 	}());
 });
 
-app.get('/makeFlyer', function (req, res){
-	Store.getAllStores(function (err, stores){
-		if(err) throw err;
-		console.log(stores.length);
-		var z = 0;
-		(function loop(){
-			if(z < stores.length){
-				Item.getItemFromUrlNum(stores[z].urlNumber, function (err2, items){
-					if(err2) throw err2;
-					Store.makeFlyer(stores[z], items, function (err3){
-						if(err3) throw err3;
-						console.log(z);
-						z++;
-						loop();
-					});
-				});	
-			}
-			else{
-				console.log('done');
-				res.end();
-			}
-		}());
-	});
-});
-
-var sortBestPercent = function (ob, cb){
-	ob.sort(function (a,b){
-		return b.bestPercent-a.bestPercent;
-	});
-	cb(ob);
-}
-
-var sortBestSav = function (ob, cb){
-	ob.sort(function (a,b){
-		return b.bestSav-a.bestSav;
-	});
-	cb(ob);
-}
-
-var addCategoriesToItem = function(categories, flyer, cb){
-	var catKeys = Object.keys(categories);
-	catKeys .splice(0, 1);
-	for (var i = catKeys.length - 1; i >= 0; i--) {
-		var foodObjectArray = categories[catKeys[i]];
-		for (var j = foodObjectArray.length - 1; j >= 0; j--){
-			var itemName = foodObjectArray[j].item;
-			for (var k = flyer.length - 1; k >= 0; k--) {
-				if(flyer[k].item ==itemName){
-					flyer[k].categories = catKeys[i];
-				}
-			};
-		};
-	};
-cb(flyer);
-}
-
-app.get('/getNearestStores/:elat/:elong/:maxD', function (req, res){
-    var elat = req.params.elat;
-    var elong = req.params.elong;
-    
-
-    var maxD = req.params.maxD/111;
-    //maxD = 10/111
-    console.log(elong+ " " + elat + " " + maxD);
-	Store.getNearestStores( elong ,elat,maxD,function (err, flyer){
-		if(err){
-			console.log("there was an error");
-		}
-		else{
-			console.log('result is: ')
-			console.log(flyer.length);
-			for (var i = flyer.length - 1; i >= 0; i--) {
-				console.log(flyer[i].storeName);
-			};
-			/*var arr = [];
-			for (var i = 0; i < flyer.length; i++) {
-				var ob = {};
-				ob.storeName = flyer[i].storeName;
-				ob.storeLocation = flyer[i].storeLocation;
-				ob.urlNumber = flyer[i].urlNumber;
-				ob.city = flyer[i].city;
-				ob.postalCode = flyer[i].postalCode;
-				ob.storeHours = flyer[i].storeHours;
-				ob.location = flyer[i].location;
-				ob.currentInterval = flyer[i].currentInterval;
-				ob.currFlyerDate = flyer[i].currFlyerDate;
-				ob.categories = flyer[i].categories;
-				addCategoriesToItem(flyer[i].categories,flyer[i].currFlyer, function(cb){
-					ob.regularFlyer = cb;
-				});
-
-				/** here i have to give sortBestPercent a clone of the currFlyer or else
-						sort will just mutate the original flyer which isn't good 
-				sortBestPercent(ce.clone(flyer[i].currFlyer), function (cb){
-					addCategoriesToItem(flyer[i].categories,cb, function(callback){
-						ob.bestPercentFlyer = callback;
-					});
-				sortBestSav(ce.clone(flyer[i].currFlyer), function (cb2){
-					addCategoriesToItem(flyer[i].categories,cb2, function(callback2){
-						ob.bestSavFlyer = callback2;
-					});
-						arr.push(ob);
-
-						//console.log(ob + i + '\n');
-					});
-					//console.log(cb);
-					
-				});
-
-
-			};
-			console.log('the flyers');
-			res.send(arr);*/
-			res.send(flyer);
-		}
-	});
-});
-
-app.get('/GetNearestByPostal/:postal/:maxD', function (req, res){
-	
-});
-
-app.get('/viewFlyer/:url', function (req, res){
-	Store.getStoreByUrlNum(req.params.url, function (err, store){
-		var ob = {};
-		ob.storeName = store.storeName;
-		ob.storeLocation = store.storeLocation;
-		ob.urlNumber = store.urlNumber;
-		ob.city = store.city;
-		ob.postalCode = store.postalCode;
-		ob.storeHours = store.storeHours;
-		ob.location = store.location;
-		ob.currentInterval =store.currentInterval;
-		ob.currFlyerDate = store.currFlyerDate;
-		ob.regularFlyer = store.currFlyer;
-		ob.categories = store.categories;
-		/** here i have to give sortBestPercent a clone of the currFlyer or else
-		sort will just mutate the original flyer which isn't good */
-		sortBestPercent(ce.clone(store.currFlyer), function (cb){
-			ob.bestPercentFlyer = cb;
-			sortBestSav(ce.clone(store.currFlyer), function (cb2){
-				ob.bestSavFlyer = cb2;
-			});			
-		});
-		res.send(ob);
-	});
-});
-
-app.get('/getAllStores', function (req, res){
-
-	Store.getAllStores(function (err, flyer){
-		if(err){
-			console.log("there was an error");
-		}
-		else{
-			console.log('this is the flyer');
-			//console.log(flyer)
-			res.send(flyer);
-		}
-	});
-});
-
-
-app.get('/getSobeyFlyer/:id', function (req, res){
-	Store.getStoreByUrlNum(req.params.id, function (err, store){
-	
-		if (err) res.send(500, 'could not get store by number')
-		else{
-			res.send(store);
-		}
-	})
-});
-
-var test = [
-	{'sav': 'save up to $3.97', 'price': '3/$20.00'}
-	, {'sav': 'save up to $2.50/lb', 'price': '$8.99/lb'}
-	, {'sav': 'save up to $0.9/lb', 'price': '$5.49/lb'}
-	, {'sav': 'save up to $0.79', 'price': '2/$4.00'}
-	, {'sav': 'save up to $0.97 on 3', 'price': '3/$5.00'}
-	, {'sav': 'this week', 'price': '$9.99/ea.'}
-	, {'sav': 'save up to $0.70/lb,ea', 'price': '$1.79/lb'}
-	, {'sav': 'save $0.30', 'price': '$0.99/ea'}
-	, {'sav': 'save up to $9.77 on 3', 'price': '3/$9.99'}
-	, {'sav': 'save up to $3.00', 'price': '$12.99/ea'}
-	, {'sav': 'save $0.20/100g', 'price': '$1.79/100g'}
-	, {'sav': '', 'price': '$3.35/100g'}
-	, {'sav': 'save up to $0.30', 'price': '$0.69/ea'}
-	, {'sav': 'save this week', 'price': 'noPrice15%off'}
-	]
-
-app.get('/deal', function (req, res){
-	var info = [];
-	for (var y = test.length - 1; y>= 0; y--) {
-		getBest(test[y], function (percent, sav, extra){
-			var ob = {};
-			ob.bestPercent = percent;
-			ob.bestSav = sav;
-			ob.extra = extra;
-			info.push(ob);
-		});
-	};
-	console.log('info is: ');
-	console.log(info);
-	res.end();
-});
-
 app.get('/getMetroStore', function (req, res){
 	var url = 'http://www.metro.ca/find-a-store/details.en.html?id='
 
@@ -910,7 +867,7 @@ app.get('/getMetroStore', function (req, res){
 					loop();
 				}
 				else{
-					
+
 					var latLong = $('.store-details .where .see-more')[0].attribs.href
 					, pattern = /[0-9-,][0-9.]+/g
 					, matches = latLong.match(pattern);
@@ -947,7 +904,7 @@ app.get('/getMetroStore', function (req, res){
 					//console.log(lat + " " + lng);
 					Store.makeStore('metro', storename, storeloc, storenum, urlnum, city, postal, hours, lat, lng, function (err){
 						if(err) throw err;
-						
+
 						console.log(z);
 						z++;
 						loop();

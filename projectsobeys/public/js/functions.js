@@ -87,7 +87,7 @@ $(document).ready(function(){
 		console.log('not at viewFlyer');
 		$('.checkValid').hide();
 	}
-	
+
 	$('.clearList').on('click', function(){
 		var shoppingList = { 'count': 0, 'list': [] };
 		localStorage.setItem('shoppingList', JSON.stringify(shoppingList));

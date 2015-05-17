@@ -1,6 +1,6 @@
 
 var GetSobeysFlyer = Backbone.Model.extend({
-	url:  getURL('/projectYawHide/getAllStores') 
+	url:  getURL('/projectsobeys/getAllStores')
 });
 
 
@@ -16,9 +16,9 @@ var GetNearestSobeys = Backbone.Collection.extend({
         this.maxD = options.maxD;
     },
     url: function(){
-        return getURL('/projectYawHide/getNearestStores/') +this.elat+'/'+this.elong+'/'+this.maxD;
+        return getURL('/projectsobeys/getNearestStores/') +this.elat+'/'+this.elong+'/'+this.maxD;
     }
-}); 
+});
 
 var GetNearestByPostal = Backbone.Collection.extend({
     initialize: function(options){
@@ -26,18 +26,18 @@ var GetNearestByPostal = Backbone.Collection.extend({
         this.maxD = options.maxD;
     },
     url: function(){
-        return getURL('/projectYawHide/getNearestByPostal/') +this.postal+'/'+this.maxD;
+        return getURL('/projectsobeys/getNearestByPostal/') +this.postal+'/'+this.maxD;
     }
-}); 
+});
 
 var GetOneSobeyStore = Backbone.Model.extend({
     initialize: function(options){
         this.id = options.id;
     },
     url: function(){
-        return getURL('/projectYawHide/viewFlyer/') +this.id;
+        return getURL('/projectsobeys/viewFlyer/') +this.id;
     }
-}); 
+});
 
 var GetLatLongFromPostal = Backbone.Model.extend({
     initialize: function(options){

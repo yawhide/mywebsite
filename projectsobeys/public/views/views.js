@@ -49,27 +49,27 @@ var NearestStoresView = Backbone.View.extend({
 				success: function(){
 					console.log(nearestSobeysStores);
 					var storesArray = [];
-					
+
 					for(var i=0;i<nearestSobeysStores.length;i++){
 						storesArray.push( nearestSobeysStores.models[i].attributes);
 					}
 					//console.log(storesArray);
 
-					$.get('/projectYawHide/templates/nearestStores.html', function (incomingTemplate){
+					$.get('/projectsobeys/templates/nearestStores.html', function (incomingTemplate){
 						var template = Handlebars.compile(incomingTemplate);
 						$('#page_container').html(template).trigger('create');
 						//google.maps.event.addDomListener(window, 'load', initializeMap(loc.latitude, loc.longitude));
 						var incomingStores =
 						"<div class='list-group'>"+
 						"{{#storesArray}}"+
-						"<a href='/projectYawHide/#/viewFlyer/{{urlNumber}}' class='list-group-item text-center'>Sobeys - {{storeName}}</a>"+
+						"<a href='/projectsobeys/#/viewFlyer/{{urlNumber}}' class='list-group-item text-center'>Sobeys - {{storeName}}</a>"+
 						"{{/storesArray}}"+
 						"</div>";
-						
+
 						var html = Mustache.to_html(incomingStores,{storesArray:storesArray} );
 						$('.tablesForStore').html(html).trigger('create');
 					});
-					$('.checkValid').hide();			
+					$('.checkValid').hide();
 					return this;
 				},
 				error: function(){
@@ -100,27 +100,27 @@ var PostalStoresView = Backbone.View.extend({
 								for(var i=0;i<nearestSobeysStores.length;i++){
 									storesArray.push( nearestSobeysStores.models[i].attributes);
 								}
-								$.get('/projectYawHide/templates/nearestStores.html', function (incomingTemplate){
+								$.get('/projectsobeys/templates/nearestStores.html', function (incomingTemplate){
 									var template = Handlebars.compile(incomingTemplate);
 									$('#page_container').html(template).trigger('create');
 									var incomingStores =
 									"<div class='list-group'>"+
 									"{{#storesArray}}"+
-									"<a href='/projectYawHide/#/viewFlyer/{{urlNumber}}' class='list-group-item text-center'>Sobeys - {{storeName}}</a>"+
+									"<a href='/projectsobeys/#/viewFlyer/{{urlNumber}}' class='list-group-item text-center'>Sobeys - {{storeName}}</a>"+
 									"{{/storesArray}}"+
 									"</div>";
 
 									var html = Mustache.to_html(incomingStores,{storesArray:storesArray} );
 									$('.tablesForStore').html(html).trigger('create');
 								});
-								$('.checkValid').hide();					
+								$('.checkValid').hide();
 								return this;
 							},
 							error: function(){
 								console.log('there was an error');
 							}
 						});
-						}, 
+						},
 					error:function(){
 						console.log('Error from Yahoo API');
 
@@ -144,14 +144,14 @@ var StoreInfoView = Backbone.View.extend({
 				"<tr><td>{{city}}</td></tr>"+
 				"<tr><td>Store Hours - {{storeHours.open}}</td></tr>"+
 				"</table>";
-				
+
 				$('#page_container').html(Mustache.to_html(template, store.attributes)).trigger('create');
 				$('.checkValid').hide();
 				return this;
 			}
 		});
 	}
-	
+
 });
 
 var ViewFlyerView = Backbone.View.extend({
@@ -170,7 +170,7 @@ var ViewFlyerView = Backbone.View.extend({
 		store.fetch({
 			success: function(){
 				console.log(store.attributes);
-				$.get('/projectYawHide/templates/flyer.html', function(incomingTemplate){
+				$.get('/projectsobeys/templates/flyer.html', function(incomingTemplate){
 					var template = Handlebars.compile(incomingTemplate);
 					$('#page_container').html(template({storeInfo:store.attributes})).trigger('create');
 				});
@@ -257,7 +257,7 @@ var ViewFlyerView = Backbone.View.extend({
 	, doCateg: function(event){
 		var ii = 0
 		, list = $(".flyerContainer > div").get();
-		
+
 
 		for(;ii<list.length; ii++){
 			if($(event.target).data('categ') === 'all'){
@@ -269,7 +269,7 @@ var ViewFlyerView = Backbone.View.extend({
 			else{
 				$(list[ii]).hide();
 			}
-			
+
 		}
 		var child = $('.categToggle').children();
 		for (var i = child.length - 1; i >= 0; i--) {
@@ -279,7 +279,7 @@ var ViewFlyerView = Backbone.View.extend({
 			else{
 				$(child[i]).removeClass('active');
 			}
-		};		
+		};
 		window.scrollTo(0,0);
 	}
 	, addCart: function(event){

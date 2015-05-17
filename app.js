@@ -16,7 +16,7 @@ app.set('trust proxy', true);
 app.use(favicon());
 app.use(require('morgan')('dev'));
 
-app.use('/projectyawhide', require('./projectYawHide/app'))
+app.use('/projectsobeys', require('./projectsobeys/app'))
 app.use('/bonified', require('./bonified/app'))
 app.use('/playground', require('./playground/app'))
 app.use('/surveyhide', require('./surveyhide/app'))
