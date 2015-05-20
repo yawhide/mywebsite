@@ -38,7 +38,6 @@ forEach($projects, function (index, element) {
   }
 });
 
-
 document.onscroll = function (){
   if(window.innerWidth > 830){
     if(window.pageYOffset > 106)
