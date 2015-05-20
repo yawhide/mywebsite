@@ -9,7 +9,7 @@ var projects = {
   'highlight-kik': 'kik',
   'highlight-textnow': 'textnow',
   'highlight-match-3': 'match-3',
-  'highlight-projectyawhide': 'projectyawhide',
+  'highlight-projectsobeys': 'projectsobeys',
   'highlight-bonified': 'bonified',
   'highlight-hop': 'hop',
   'highlight-htn': 'htn',
