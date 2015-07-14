@@ -9,7 +9,7 @@ var projects = {
   'highlight-kik': 'kik',
   'highlight-textnow': 'textnow',
   'highlight-match-3': 'match-3',
-  'highlight-projectyawhide': 'projectyawhide',
+  'highlight-projectsobeys': 'projectsobeys',
   'highlight-bonified': 'bonified',
   'highlight-hop': 'hop',
   'highlight-htn': 'htn',
@@ -32,12 +32,12 @@ forEach($projects, function (index, element) {
       $highlighter.classList.remove('highlight-' + element.dataset.project)
     }
     element.onclick = function (){
+      ga('send', 'event', 'button', 'click', element.dataset.project);
       if(element.dataset && element.dataset.url)
         window.open(element.dataset.url, '_blank')
     }
   }
 });
-
 
 document.onscroll = function (){
   if(window.innerWidth > 830){
