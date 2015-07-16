@@ -129,6 +129,7 @@ var transporter = nodemailer.createTransport({
 
 var startOfToday = moment().startOf('day')
 var timeBuffer = moment().subtract(5, 'm')
+updateTimes()
 
 function getClosestTime(arrayOfTimes, givenTime){
   var shortestTimeIndex
@@ -193,7 +194,7 @@ function updateTimes(givenTime){
     increaseDay(oneeyeTimersEst)
     increaseDay(robotTimersEst)
   }
-  setTimeout(updateTimes, 30*60*60*1000)
+  setTimeout(updateTimes, 3*60*1000)
 }
 
 function increaseDay(arrayOfTimes){
