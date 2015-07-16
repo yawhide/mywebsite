@@ -202,17 +202,16 @@ function increaseDay(arrayOfTimes){
   }
 }
 
-function checkBadResponse(time){
+function checkBadResponse(time, arrayOfTimes){
   if((time < 0 || !time || time > 90*60*1000) && timeBuffer.isBefore(moment())){
     transporter.sendMail({
       from: 'lowcbturm@gmail.com',
       to: 'ert.mcscrad@gmail.com',
       subject: 'wrong time given!',
-      text: JSON.stringify(time) + '\n\n' + new Date().toString()
+      text: time + '\n\n' + JSON.stringify(arrayOfTimes) + '\n\n' + new Date().toString()
     })
     timeBuffer = moment().add(5, 'm')
   }
-
 }
 
 module.exports = {
