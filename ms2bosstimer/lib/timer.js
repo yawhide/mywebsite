@@ -154,6 +154,9 @@ function getClosestTime(arrayOfTimes, givenTime){
         var timeRightNow = givenTime || Date.now()
         var time = (arrayOfTimes[i].toDate() - timeRightNow)/1000 | 0
         checkBadResponse(time, arrayOfTimes)
+        if(time < 5*60){
+
+        }
         return {
           time: time,
           timezone: new Date().getTimezoneOffset()/60,

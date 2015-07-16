@@ -19,3 +19,7 @@ body {
 .time{
   display: inline-block;
 }
+
+.volume, .mute{
+  cursor: pointer;
+}
