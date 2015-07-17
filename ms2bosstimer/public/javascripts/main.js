@@ -41,33 +41,35 @@ function init(){
   startTimer(oneeyeNextSpawn, $oneeyeCountDown, 'red one eye')
   startTimer(robotNextSpawn, $robotCountDown, 'mark 52 alpha')
 
-  if(localStorage['muteAll'] && localStorage['muteAll'] === 'true'){
-    muteAll = true
-  } else {
-    muteAll = false
-  }
-
-  if(muteAll){
-    $volume.style.display = 'none'
-  } else {
-    $mute.style.display = 'none'
-  }
-
-  for (var i = 0; i < volumeSection.length; i++) {
-    var volumeIcon = document.querySelector('.section--' + volumeSection[i].name + ' .volume')
-    var muteIcon = document.querySelector('.section--' + volumeSection[i].name + ' .mute')
-    if((localStorage[volumeSection[i].name] && localStorage[volumeSection[i].name] === 'true') || muteAll){
-      volumeIcon.style.display = 'none'
-      volumeSection[i].muted = true
+  if ('speechSynthesis' in window) {
+    if(localStorage['muteAll'] && localStorage['muteAll'] === 'true'){
+      muteAll = true
     } else {
-      muteIcon.style.display = 'none'
+      muteAll = false
     }
-    volumeIcon.onclick = toggleVolume
-    muteIcon.onclick = toggleVolume
-  }
 
-  $mute.onclick = toggleMasterVolume
-  $volume.onclick = toggleMasterVolume
+    if(muteAll){
+      $volume.style.display = 'none'
+    } else {
+      $mute.style.display = 'none'
+    }
+
+    for (var i = 0; i < volumeSection.length; i++) {
+      var volumeIcon = document.querySelector('.section--' + volumeSection[i].name + ' .volume')
+      var muteIcon = document.querySelector('.section--' + volumeSection[i].name + ' .mute')
+      if((localStorage[volumeSection[i].name] && localStorage[volumeSection[i].name] === 'true') || muteAll){
+        volumeIcon.style.display = 'none'
+        volumeSection[i].muted = true
+      } else {
+        muteIcon.style.display = 'none'
+      }
+      volumeIcon.onclick = toggleVolume
+      muteIcon.onclick = toggleVolume
+    }
+
+    $mute.onclick = toggleMasterVolume
+    $volume.onclick = toggleMasterVolume
+  }
 }
 
 function alertUser(boss){
