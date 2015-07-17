@@ -25,6 +25,7 @@ if (!'speechSynthesis' in window) {
   }
   $volume.style.display = 'none'
   $mute.style.display = 'none'
+  document.querySelector('.volume-text').style.display = 'none'
 }
 
 init()
@@ -140,8 +141,8 @@ function toggleVolume(){
     document.querySelector('.section--' + volumeSection[volumeSectionIndex].name + ' .volume').style.display = 'inline-block'
     document.querySelector('.section--' + volumeSection[volumeSectionIndex].name + ' .mute').style.display = 'none'
     localStorage[volumeSection[volumeSectionIndex].name] = false
-    if($mute.style.display === '' || $mute.style.display === 'block'){
-      $volume.style.display = 'block'
+    if($mute.style.display === '' || $mute.style.display === 'inline-block'){
+      $volume.style.display = 'inline-block'
       $mute.style.display = 'none'
       localStorage['muteAll'] = false
       updateLocalStorage()
@@ -157,8 +158,8 @@ function toggleMasterVolume(){
     volumeSection[i].muted = status === 'master-mute' ? false : true
     updateLocalStorage()
   }
-  $volume.style.display = status === 'master-mute' ? 'block' : 'none'
-  $mute.style.display = status === 'master-mute' ? 'none' : 'block'
+  $volume.style.display = status === 'master-mute' ? 'inline-block' : 'none'
+  $mute.style.display = status === 'master-mute' ? 'none' : 'inline-block'
   localStorage['muteAll'] = status !== 'master-mute'
 }
 

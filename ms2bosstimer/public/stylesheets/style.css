@@ -20,6 +20,15 @@ body {
   display: inline-block;
 }
 
+.volume-text{
+  display: inline-block;
+}
+
 .volume, .mute{
   cursor: pointer;
+  display: inline-block;
+}
+
+.master-volume, .master-mute{
+  vertical-align:  text-bottom;
 }
