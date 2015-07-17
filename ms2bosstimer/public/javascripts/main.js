@@ -18,7 +18,7 @@ var volumeSection = [
 ]
 var muteAll
 
-if (!'speechSynthesis' in window) {
+if (!('speechSynthesis' in window)) {
   for (var i = 0; i < volumeSection.length; i++) {
     document.querySelector('.section--' + volumeSection[i].name + ' .volume').style.display = 'none'
     document.querySelector('.section--' + volumeSection[i].name + ' .mute').style.display = 'none'
