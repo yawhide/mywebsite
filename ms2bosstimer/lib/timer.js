@@ -196,6 +196,7 @@ function updateTimes(givenTime){
     increaseDay(sallyTimersEst)
     increaseDay(oneeyeTimersEst)
     increaseDay(robotTimersEst)
+    startOfToday = now.startOf('day')
   }
   setTimeout(updateTimes, 3*60*1000)
 }
