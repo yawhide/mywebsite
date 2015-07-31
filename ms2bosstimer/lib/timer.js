@@ -119,6 +119,50 @@ var robotTimersEst = [
   moment().hours(23).minute(45).seconds(0),
 ]
 
+var baphometTimersEst = [
+  moment().hours(0).minute(5).seconds(0),
+  moment().hours(1).minute(5).seconds(0),
+  moment().hours(2).minute(5).seconds(0),
+  moment().hours(3).minute(5).seconds(0),
+  moment().hours(4).minute(5).seconds(0),
+  moment().hours(5).minute(5).seconds(0),
+  moment().hours(6).minute(5).seconds(0),
+  moment().hours(7).minute(5).seconds(0),
+  moment().hours(8).minute(5).seconds(0),
+  moment().hours(9).minute(35).seconds(0),
+  moment().hours(11).minute(5).seconds(0),
+  moment().hours(12).minute(35).seconds(0),
+  moment().hours(14).minute(5).seconds(0),
+  moment().hours(15).minute(35).seconds(0),
+  moment().hours(17).minute(5).seconds(0),
+  moment().hours(18).minute(35).seconds(0),
+  moment().hours(20).minute(5).seconds(0),
+  moment().hours(21).minute(35).seconds(0),
+  moment().hours(23).minute(5).seconds(0),
+]
+
+var cerberusTimersEst = [
+  moment().hours(0).minute(45).seconds(0),
+  moment().hours(1).minute(45).seconds(0),
+  moment().hours(2).minute(45).seconds(0),
+  moment().hours(3).minute(45).seconds(0),
+  moment().hours(4).minute(45).seconds(0),
+  moment().hours(5).minute(45).seconds(0),
+  moment().hours(6).minute(45).seconds(0),
+  moment().hours(7).minute(45).seconds(0),
+  moment().hours(8).minute(45).seconds(0),
+  moment().hours(10).minute(15).seconds(0),
+  moment().hours(11).minute(45).seconds(0),
+  moment().hours(13).minute(15).seconds(0),
+  moment().hours(14).minute(45).seconds(0),
+  moment().hours(16).minute(15).seconds(0),
+  moment().hours(17).minute(45).seconds(0),
+  moment().hours(19).minute(15).seconds(0),
+  moment().hours(20).minute(45).seconds(0),
+  moment().hours(22).minute(15).seconds(0),
+  moment().hours(23).minute(45).seconds(0),
+]
+
 var transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
@@ -186,6 +230,8 @@ function getNextSpawn(){
     sally: getClosestTime(sallyTimersEst),
     oneeye: getClosestTime(oneeyeTimersEst),
     robot: getClosestTime(robotTimersEst),
+    baphomet: getClosestTime(baphometTimersEst),
+    cerberus: getClosestTime(cerberusTimersEst),
   }
 }
 
@@ -227,4 +273,6 @@ module.exports = {
   sallyTimersEst: sallyTimersEst,
   oneeyeTimersEst: oneeyeTimersEst,
   robotTimersEst: robotTimersEst,
+  baphometTimersEst: baphometTimersEst,
+  cerberusTimersEst: cerberusTimersEst,
 }

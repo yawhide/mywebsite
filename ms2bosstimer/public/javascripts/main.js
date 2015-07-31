@@ -2,19 +2,27 @@ var $griffy = document.querySelector('.time--griffy')
 var $sally = document.querySelector('.time--sally')
 var $oneeye = document.querySelector('.time--oneeye')
 var $robot = document.querySelector('.time--robot')
+var $baphomet = document.querySelector('.time--baphomet')
+var $cerberus = document.querySelector('.time--cerberus')
+
 var $griffyCountDown = document.querySelector('.countdown--griffy')
 var $sallyCountDown = document.querySelector('.countdown--sally')
 var $oneeyeCountDown = document.querySelector('.countdown--oneeye')
 var $robotCountDown = document.querySelector('.countdown--robot')
+var $baphometCountDown = document.querySelector('.countdown--baphomet')
+var $cerberusCountDown = document.querySelector('.countdown--cerberus')
+
 var $volume = document.querySelector('.master-volume')
 var $mute = document.querySelector('.master-mute')
 var bossSpawnWarningSuffix = ' spawns in less then 5 minutes'
-var bossStrArr = ['griffy', 'cargo', 'red one eye', 'mark 52 alpha']
+var bossStrArr = ['griffy', 'cargo', 'red one eye', 'mark 52 alpha', 'baphomet', 'cereberus']
 var volumeSection = [
   { name: 'griffy', muted: false},
   { name: 'sally', muted: false},
   { name: 'oneeye', muted: false},
   { name: 'robot', muted: false},
+  { name: 'baphomet', muted: false},
+  { name: 'cerberus', muted: false},
 ]
 var muteAll
 
@@ -35,11 +43,15 @@ function init(){
   var sallyNextSpawn = TIMERS.sally.time
   var oneeyeNextSpawn = TIMERS.oneeye.time
   var robotNextSpawn = TIMERS.robot.time
+  var baphometNextSpawn = TIMERS.baphomet.time
+  var cerberusNextSpawn = TIMERS.cerberus.time
 
   startTimer(griffyNextSpawn, $griffyCountDown, 'griffy')
   startTimer(sallyNextSpawn, $sallyCountDown, 'cargo')
   startTimer(oneeyeNextSpawn, $oneeyeCountDown, 'red one eye')
   startTimer(robotNextSpawn, $robotCountDown, 'mark 52 alpha')
+  startTimer(baphometNextSpawn, $baphometCountDown, 'baphomet')
+  startTimer(cerberusNextSpawn, $cerberusCountDown, 'cerberus')
 
   if ('speechSynthesis' in window) {
     if(localStorage['muteAll'] && localStorage['muteAll'] === 'true'){
