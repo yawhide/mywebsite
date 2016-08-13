@@ -26,8 +26,6 @@ app.configure(function(){
 	app.use(flash());
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
-
-
 });
 
 app.configure('development', function(){
@@ -49,7 +47,7 @@ var Results = require('./models/results');
 var Survey = require('./models/survey');
 
 // Connect mongoose
-mongoose.connect('mongodb://surveyhide:'+process.env.SURVEYHIDE+'@ds031822.mongolab.com:31822/surveyhide');
+mongoose.connect('mongodb://'+process.env.SURVEYHIDE_USERNAME+':'+process.env.SURVEYHIDE_PASSWORD+'@ds031822.mlab.com:31822/surveyhide');
 
 // Setup routes
 require('./loginServer')(app);

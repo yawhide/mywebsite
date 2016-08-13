@@ -16,11 +16,11 @@ app.set('trust proxy', true);
 app.use(favicon());
 app.use(require('morgan')('dev'));
 
-app.use('/projectsobeys', require('./projectsobeys/app'))
+// app.use('/projectsobeys', require('./projectsobeys/app'))
 app.use('/bonified', require('./bonified/app'))
-app.use('/playground', require('./playground/app'))
-app.use('/surveyhide', require('./surveyhide/app'))
-app.use('/ms2bosstimers', require('./ms2bosstimer/app'))
+// app.use('/playground', require('./playground/app'))
+// app.use('/surveyhide', require('./surveyhide/app'))
+// app.use('/ms2bosstimers', require('./ms2bosstimer/app'))
 app.use(require('./main/app'))
 
 // development error handler

@@ -20,7 +20,6 @@ app.set('views', __dirname + '/views');
 app.engine('handlebars', exphbs({defaultLayout : 'main'}));
 app.set('view engine', 'handlebars');
 app.use(express.favicon());
-app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -43,7 +42,7 @@ app.get('/', function(req, res){
     }
     else{
       res.writeHead(200, { 'Content-Type': 'text/html'});
-      console.log(content)
+      // console.log(content)
       res.end(content, 'utf-8');
     }
   });
@@ -51,7 +50,7 @@ app.get('/', function(req, res){
 
 /**
  * Sends the frontend the result of calling User.getTopHighscore
-    which is a multi-layered JSON object 
+    which is a multi-layered JSON object
  * User is a User model from the models/User.js file.
  * getTopHighscore is a mongoose method from the models folder.
 */
@@ -95,7 +94,7 @@ app.post('/search', function(req, res){
 /**
  * Receives a username and a highscore from the frontend and calls
     addUser which posts those two pieces of info into the mongoDB
-    database. It then sends the frontend a status of success or 
+    database. It then sends the frontend a status of success or
     fail.
  * User is a User model and findOneHighscore is a mongoose method,
     both are form the models/User.js file
@@ -105,15 +104,14 @@ app.post('/addHighScore', function(req, res) {
   var highscore = req.body.highscore;
   console.log(highscore);
   User.addUser(username, highscore, function(err, user) {
-    if(err != null){   
-      console.log(err);    
+    if(err != null){
       res.send(err);
     }
     else{
       res.send(user);
     }
-    
-  }); 
+
+  });
 });
 
 module.exports = app;

@@ -11,21 +11,23 @@ module.exports.Schema = Schema;
  * in the url0 variable we needed to specify an address provided
     by mongolab
 */
-var username = "stephan"; 
+var username = process.env.BONIFIED_USERNAME;
 var localUsername = "localhost";
-var password = "mongo"; 
+var password = process.env.BONIFIED_PASSWORD;
 var localPassword = "27017";
-var address = '@ds047458.mongolab.com:47458/rememberalldb';
+var address = '@ds047458.mlab.com:47458/rememberalldb';
 var localAddress = "/rememberalldb";
 connect();
+
 // Connect to mongo
 function connect() {
-
     var url0 = 'mongodb://' + username + ':' + password + address;
-    var url1 = 'mongodb://' + localUsername + ':' + localPassword + localAddress;
+    // var url1 = 'mongodb://' + localUsername + ':' + localPassword + localAddress;
 
     mongoose.connect(url0);
     console.log("Database connected!");
 }
-function disconnect() {mongoose.disconnect()}
+function disconnect() {
+  mongoose.disconnect();
+}
 
