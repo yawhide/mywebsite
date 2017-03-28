@@ -1,5 +1,6 @@
 
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var Schema = mongoose.Schema;
 module.exports.mongoose = mongoose;
 module.exports.Schema = Schema;
@@ -11,18 +12,18 @@ module.exports.Schema = Schema;
  * in the url0 variable we needed to specify an address provided
     by mongolab
 */
-var username = process.env.BONIFIED_USERNAME;
+// var username = process.env.BONIFIED_USERNAME;
 var localUsername = "localhost";
-var password = process.env.BONIFIED_PASSWORD;
+// var password = process.env.BONIFIED_PASSWORD;
 var localPassword = "27017";
-var address = '@ds047458.mlab.com:47458/rememberalldb';
+// var address = '@ds047458.mlab.com:47458/rememberalldb';
 var localAddress = "/rememberalldb";
 connect();
 
 // Connect to mongo
 function connect() {
-    var url0 = 'mongodb://' + username + ':' + password + address;
-    // var url1 = 'mongodb://' + localUsername + ':' + localPassword + localAddress;
+    // var url0 = 'mongodb://' + username + ':' + password + address;
+    var url0 = 'mongodb://' + localUsername + ':' + localPassword + localAddress;
 
     mongoose.connect(url0);
     console.log("Database connected!");

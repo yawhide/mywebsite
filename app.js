@@ -1,9 +1,6 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser')
-var _ = require('underscore');
 var partials = require('express-partials');
 
 var app = express();
@@ -14,7 +11,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('trust proxy', true);
 
 app.use(favicon());
-app.use(require('morgan')('dev'));
+// app.use(require('morgan')('dev'));
 
 // app.use('/projectsobeys', require('./projectsobeys/app'))
 app.use('/bonified', require('./bonified/app'))
