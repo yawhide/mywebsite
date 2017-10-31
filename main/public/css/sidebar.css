@@ -53,7 +53,8 @@
 .sideBar.highlight-bonified .bonified,
 .sideBar.highlight-surveyhide .surveyhide,
 .sideBar.highlight-hop .hop,
-.sideBar.highlight-htn .htn{
+.sideBar.highlight-htn .htn,
+.sideBar.highlight-r .r{
   -webkit-box-shadow: 1px 1px 5px 1px rgba(89, 127, 204, 0.8);
   -moz-box-shadow:    1px 1px 5px 1px rgba(89, 127, 204, 0.8);
   box-shadow:         1px 1px 5px 1px rgba(89, 127, 204, 0.8);
