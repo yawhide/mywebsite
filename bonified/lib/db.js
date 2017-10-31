@@ -18,7 +18,6 @@ var localUsername = "localhost";
 var localPassword = "27017";
 // var address = '@ds047458.mlab.com:47458/rememberalldb';
 var localAddress = "/rememberalldb";
-connect();
 
 // Connect to mongo
 function connect() {
@@ -28,7 +27,5 @@ function connect() {
     mongoose.connect(url0);
     console.log("Database connected!");
 }
-function disconnect() {
-  mongoose.disconnect();
-}
 
+connect();

@@ -14,6 +14,7 @@ var projects = {
   'highlight-hop': 'hop',
   'highlight-htn': 'htn',
   'highlight-surveyhide': 'surveyhide',
+  'highlight-r': 'r',
 }
 
 $sidebarBtn.onclick = function (){
